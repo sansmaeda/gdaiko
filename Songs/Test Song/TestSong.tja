@@ -1,0 +1,15 @@
+//Not a real beatmap. Written in order to test the parser. Feel free to use as a reference.
+
+TITLE:Test Title
+TITLEJA:Test Title Japanese
+TITLEEN:Test Title English
+TITLECN:Test Title Chinese
+TITLETW:Test Title Chinese Traditional
+TITLEKO:Test Title Korean
+
+SUBTITLE:Test Subtitle
+SUBTITLEJA:Test Subtitle Japanese
+SUBTITLEEN:Test Subtitle English
+SUBTITLECN:Test Subtitle Chinese
+SUBTITLETW:Test Subtitle Chinese Traditional
+SUBTITLEKO:Test Subtitle Korean
