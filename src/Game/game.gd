@@ -6,7 +6,6 @@ var title: String
 func _ready():
 	var parser: TJAParser = TJAParser.new()
 	parser.parse("res://Songs/Test Song/TestSong.tja")
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
