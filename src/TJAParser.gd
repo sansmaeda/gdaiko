@@ -36,7 +36,7 @@ var BPM: float = 120
 ##Path to the song audio file used during gameplay. Located in the same folder as the TJA.
 var Wave: String
 ##Offset of the notes in seconds.
-var Offset: float 
+var Offset: float
 ##Offset of the title gameplay demonstration for the song
 var DemoStart: float
 
@@ -98,13 +98,13 @@ class Chart:
 	var ChartData: String
 
 var ChartEasy: Chart
-var ChartNornal: Chart
+var ChartNormal: Chart
 var ChartHard: Chart
 var ChartOni: Chart
 ##Ura Oni chart
 var ChartEdit: Chart
 ##???
-var ChartTower: Chart 
+var ChartTower: Chart
 ##Dojo mode chart
 var ChartDan: Chart
 #endregion
@@ -115,173 +115,183 @@ func parse(path: String):
 	#(?m) regex multiline flag
 	var regex: RegEx = RegEx.new()
 	var buffer
+	
 	#Remove comments
-	regex.compile(r'(?m)^//.*\n')
-	buffer = regex.search_all(text)
-	for item: RegExMatch in buffer:
-		text = text.erase(item.get_start(), item.get_string().length()+1)
+	regex.compile(r'(?m)\/\/.*$')
+	while(true):
+		buffer = regex.search(text)
+		if(buffer):
+			text = text.erase(max(buffer.get_start()-1, 0), buffer.get_end()-buffer.get_start())
+			buffer = null
+		else:
+			buffer = null
+			break
 	
 	#Remove blank lines
-	regex.compile(r'(?m)^\n')
-	buffer = regex.search_all(text)
-	for item: RegExMatch in buffer:
-		text = text.erase(item.get_start(), 1)
-	text = text.strip_edges()
+	regex.compile(r'(?m)^\s+')
+	while(true):
+		buffer = regex.search(text)
+		if(buffer):
+			text = text.erase(max(buffer.get_start()-1, 0), buffer.get_end()-buffer.get_start())
+			buffer = null
+		else:
+			buffer = null
+			break
 	
 	#region Song Metadata
 	#region Titles
 	#Title
-	regex.compile(r'(?m)^TITLE:.*$')
+	regex.compile(r'(?m)^TITLE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Title = buffer.get_string().trim_prefix("TITLE:")
+	if(buffer):
+		Title = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#TitleJP
-	regex.compile(r'(?m)^TITLEJA:.*$')
+	regex.compile(r'(?m)^TITLEJA:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		TitleJP = buffer.get_string().trim_prefix("TITLEJA:")
+	if(buffer):
+		TitleJP = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#TitleEN
-	regex.compile(r'(?m)^TITLEEN:.*$')
+	regex.compile(r'(?m)^TITLEEN:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		TitleEN = buffer.get_string().trim_prefix("TITLEEN:")
+	if(buffer):
+		TitleEN = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#TitleCN
-	regex.compile(r'(?m)^TITLECN:.*$')
+	regex.compile(r'(?m)^TITLECN:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		TitleCN = buffer.get_string().trim_prefix("TITLECN:")
+	if(buffer):
+		TitleCN = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#TitleTW
-	regex.compile(r'(?m)^TITLETW:.*$')
+	regex.compile(r'(?m)^TITLETW:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		TitleTW = buffer.get_string().trim_prefix("TITLETW:")
+	if(buffer):
+		TitleTW = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#TitleKO
-	regex.compile(r'(?m)^TITLEKO:.*$')
+	regex.compile(r'(?m)^TITLEKO:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		TitleKO = buffer.get_string().trim_prefix("TITLEKO:")
+	if(buffer):
+		TitleKO = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	#endregion
 	
 	#region Subtitles
 	#Subtitle
-	regex.compile(r'(?m)^SUBTITLE:.*$')
+	regex.compile(r'(?m)^SUBTITLE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Subtitle = buffer.get_string().trim_prefix("SUBTITLE:")
+	if(buffer):
+		Subtitle = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#SubtitleJP
-	regex.compile(r'(?m)^SUBTITLEJA:.*$')
+	regex.compile(r'(?m)^SUBTITLEJA:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		SubtitleJP = buffer.get_string().trim_prefix("SUBTITLEJA:")
+	if(buffer):
+		SubtitleJP = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#SubtitleEN
-	regex.compile(r'(?m)^SUBTITLEEN:.*$')
+	regex.compile(r'(?m)^SUBTITLEEN:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		SubtitleEN = buffer.get_string().trim_prefix("SUBTITLEEN:")
+	if(buffer):
+		SubtitleEN = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#SubtitleCN
-	regex.compile(r'(?m)^SUBTITLECN:.*$')
+	regex.compile(r'(?m)^SUBTITLECN:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		SubtitleCN = buffer.get_string().trim_prefix("SUBTITLECN:")
+	if(buffer):
+		SubtitleCN = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#SubtitleTW
-	regex.compile(r'(?m)^SUBTITLETW:.*$')
+	regex.compile(r'(?m)^SUBTITLETW:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		SubtitleTW = buffer.get_string().trim_prefix("SUBTITLETW:")
+	if(buffer):
+		SubtitleTW = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#SubtitleKO
-	regex.compile(r'(?m)^SUBTITLEKO:.*$')
+	regex.compile(r'(?m)^SUBTITLEKO:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		SubtitleKO = buffer.get_string().trim_prefix("SUBTITLEKO:")
+	if(buffer):
+		SubtitleKO = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	#endregion
 	
 	#BPM
-	regex.compile(r'(?m)^BPM:.*$')
+	regex.compile(r'(?m)^BPM:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		BPM = buffer.get_string().trim_prefix("BPM:").to_float()
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
+	if(buffer):
+		BPM = buffer.get_string(1).to_float()
+	
 	buffer = null
 	
 	#Wave
-	regex.compile(r'(?m)^WAVE:.*$')
+	regex.compile(r'(?m)^WAVE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Wave = buffer.get_string().trim_prefix("WAVE:")
+	if(buffer):
+		Wave = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#Offset
-	regex.compile(r'(?m)^OFFSET:.*$')
+	regex.compile(r'(?m)^OFFSET:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Offset = buffer.get_string().trim_prefix("OFFSET:").to_float()
+	if(buffer):
+		Offset = buffer.get_string(1).to_float()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#DemoStart
-	regex.compile(r'(?m)^DEMOSTART:.*$')
+	regex.compile(r'(?m)^DEMOSTART:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		DemoStart = buffer.get_string().trim_prefix("DEMOSTART:").to_float()
+	if(buffer):
+		DemoStart = buffer.get_string(1).to_float()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#Genre
-	regex.compile(r'(?m)^GENRE:.*$')
+	regex.compile(r'(?m)^GENRE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Genre = buffer.get_string().trim_prefix("GENRE:")
+	if(buffer):
+		Genre = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#ScoreMode
-	regex.compile(r'(?m)^SCOREMODE:.*$')
+	regex.compile(r'(?m)^SCOREMODE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		ScoreMode = buffer.get_string().trim_prefix("SCOREMODE:")
+	if(buffer):
+		ScoreMode = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#Maker
-	regex.compile(r'(?m)^MAKER:.*$')
+	regex.compile(r'(?m)^MAKER:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Maker = buffer.get_string().trim_prefix("MAKER:")
+	if(buffer):
+		Maker = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
@@ -289,105 +299,131 @@ func parse(path: String):
 	#Not used
 	
 	#SongVol
-	regex.compile(r'(?m)^SONGVOL:.*$')
+	regex.compile(r'(?m)^SONGVOL:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		SongVol = buffer.get_string().trim_prefix("SONGVOL:").to_float()
+	if(buffer):
+		SongVol = buffer.get_string(1).to_float()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#SEVol
-	regex.compile(r'(?m)^SEVOL:.*$')
+	regex.compile(r'(?m)^SEVOL:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		SEVol = buffer.get_string().trim_prefix("SEVOL:").to_float()
+	if(buffer):
+		SEVol = buffer.get_string(1).to_float()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#Side
-	regex.compile(r'(?m)^SIDE:.*$')
+	regex.compile(r'(?m)^SIDE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Side = buffer.get_string().trim_prefix("SIDE:")
+	if(buffer):
+		Side = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#Life
-	regex.compile(r'(?m)^LIFE:.*$')
+	regex.compile(r'(?m)^LIFE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Life = buffer.get_string().trim_prefix("LIFE:").to_int()
+	if(buffer):
+		Life = buffer.get_string().to_int()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#Game
-	regex.compile(r'(?m)^GAME:.*$')
+	regex.compile(r'(?m)^GAME:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		Game = buffer.get_string().trim_prefix("GAME:")
+	if(buffer):
+		Game = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#HeadScroll
-	regex.compile(r'(?m)^HEADSCROLL:.*$')
+	regex.compile(r'(?m)^HEADSCROLL:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		HeadScroll = buffer.get_string().trim_prefix("HEADSCROLL:").to_float()
+	if(buffer):
+		HeadScroll = buffer.get_string(1).to_float()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#BGImage
-	regex.compile(r'(?m)^BGIMAGE:.*$')
+	regex.compile(r'(?m)^BGIMAGE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		BGImage = buffer.get_string().trim_prefix("BGIMAGE:")
+	if(buffer):
+		BGImage = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#BGMovie
-	regex.compile(r'(?m)^BGMOVIE:.*$')
+	regex.compile(r'(?m)^BGMOVIE:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		BGMovie = buffer.get_string().trim_prefix("BGMOVIE:")
+	if(buffer):
+		BGMovie = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
 	#MovieOffset
-	regex.compile(r'(?m)^MOVIEOFFSET:.*$')
+	regex.compile(r'(?m)^MOVIEOFFSET:(.*)$')
 	buffer = regex.search(text)
-	if(buffer): 
-		MovieOffset = buffer.get_string().trim_prefix("MOVIEOFFSET:")
+	if(buffer):
+		MovieOffset = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	#endregion
 	
 	#region Charts
-	#region 0: Easy
+	regex.compile(r'(?sm)^.*?\n#END')
+	for block in regex.search_all(text):
+		var staging = block.get_string()
+		var chart: Chart = Chart.new()
+		
+		#Level
+		regex.compile(r'(?m)^LEVEL:.*$')
+		buffer = regex.search(staging)
+		if(buffer):
+			chart.Level = buffer.get_string().trim_prefix("LEVEL:").to_int()
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
+		
+		regex.compile(r'(?m)^COURSE:(.*)$')
+		buffer = regex.search(staging)
+		match buffer.get_string(1).strip_edges():
+			"Easy", "0":
+				ChartEasy = chart
+			"Normal", "1":
+				ChartNormal = chart
+			"Hard", "2":
+				ChartHard = chart
+			"Oni", "3":
+				ChartOni = chart
+			"Edit", "4", "Ura":
+				print("FLAG")
+				ChartEdit = chart
+			"Tower", "5":
+				ChartTower = chart
+			"Dan", "6":
+				ChartDan = chart
+		buffer = null
 	#endregion
-	#region 1: Normal
-	#endregion
-	#region 2: Hard
-	#endregion
-	#region 3: Oni
-	#endregion
-	#endregion
-	print("|"+text+"|")
-	print(Title)
-	print(TitleJP)
-	print(TitleEN)
-	print(TitleCN)
-	print(TitleTW)
-	print(TitleKO)
+	print("TITLE: ", Title)
+	print("TITLEJP: ", TitleJP)
+	print("TITLEEN: ", TitleEN)
+	print("TITLECN: ", TitleCN)
+	print("TITLETW: ", TitleTW)
+	print("TITLEKO: ", TitleKO)
 	print("")
-	print(Subtitle)
-	print(SubtitleJP)
-	print(SubtitleEN)
-	print(SubtitleCN)
-	print(SubtitleTW)
-	print(SubtitleKO)
+	print("SUBTITLE: ", Subtitle)
+	print("SUBTITLEJP: ", SubtitleJP)
+	print("SUBTITLEEN: ", SubtitleEN)
+	print("SUBTITLECN: ", SubtitleCN)
+	print("SUBTITLETW: ", SubtitleTW)
+	print("SUBTITLEKO: ", SubtitleKO)
 	print("")
-	print(BPM)
-	print(Wave)
-	print(Offset)
-	print(DemoStart)
+	print("BPM: ", BPM)
+	print("WAVE: ", Wave)
+	print("OFFSET: ", Offset)
+	print("DEMOSTART: ", DemoStart)
 	print("")
+	if(ChartEdit != null):
+		print("CHARTEDIT FOUND")
+		print("CHARTEDIT LEVEL: ", ChartEdit.Level)
