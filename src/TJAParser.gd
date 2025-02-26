@@ -1,8 +1,11 @@
 # https://github.com/269Seahorse/Better-taiko-web/blob/master/TJA-format.mediawiki
 # https://outfox.wiki/en/dev/mode-support/tja-support
+# https://iepiweidieng.github.io/TJAPlayer3/tja/
 class_name TJAParser
 extends RefCounted
 ##Parses a .tja chart file into accessible data points
+
+const REGEX_ARRAY: String = r'(.+?)\s*(?:,\s*|\z)'
 
 #region Song Metadata Variables
 ##Title of the song. (Default)
@@ -51,10 +54,10 @@ var Maker: String
 var SongVol: float = 100
 ##Ingame SFX volume multiplier
 var SEVol: float = 100
-var Side: String #???
+var Side: String = "Normal" #Normal/1, EX/2, Both/3
 ##Replaces gauge if other than 0. Number of misses before failing the song.
 var Life: int = 0
-var Game: String = "Taiko" #?
+var Game: String = "Taiko" #Taiko/Jube
 ##Initial scrolling speed. #SCROLL in the chart is multiplied by this.
 var HeadScroll: float = 1
 
@@ -116,12 +119,13 @@ func parse(path: String):
 	var regex: RegEx = RegEx.new()
 	var buffer
 	
+	#region Cleaning
 	#Remove comments
 	regex.compile(r'(?m)\/\/.*$')
 	while(true):
 		buffer = regex.search(text)
 		if(buffer):
-			text = text.erase(max(buffer.get_start()-1, 0), buffer.get_end()-buffer.get_start())
+			text = text.erase(max(buffer.get_start()-1, 0), buffer.get_end()-buffer.get_start()+1)
 			buffer = null
 		else:
 			buffer = null
@@ -137,6 +141,7 @@ func parse(path: String):
 		else:
 			buffer = null
 			break
+	#endregion
 	
 	#region Song Metadata
 	#region Titles
@@ -283,7 +288,7 @@ func parse(path: String):
 	regex.compile(r'(?m)^SCOREMODE:(.*)$')
 	buffer = regex.search(text)
 	if(buffer):
-		ScoreMode = buffer.get_string(1)
+		ScoreMode = buffer.get_string(1).to_int()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
@@ -366,7 +371,7 @@ func parse(path: String):
 	regex.compile(r'(?m)^MOVIEOFFSET:(.*)$')
 	buffer = regex.search(text)
 	if(buffer):
-		MovieOffset = buffer.get_string(1)
+		MovieOffset = buffer.get_string(1).to_float()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	#endregion
@@ -378,10 +383,10 @@ func parse(path: String):
 		var chart: Chart = Chart.new()
 		
 		#Level
-		regex.compile(r'(?m)^LEVEL:.*$')
+		regex.compile(r'(?m)^LEVEL:(.*)$')
 		buffer = regex.search(staging)
 		if(buffer):
-			chart.Level = buffer.get_string().trim_prefix("LEVEL:").to_int()
+			chart.Level = buffer.get_string(1).to_int()
 			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
 		buffer = null
 		
@@ -389,7 +394,7 @@ func parse(path: String):
 		regex.compile(r'(?m)^BALLOON:(.*)$')
 		buffer = regex.search(staging)
 		if(buffer):
-			regex.compile(r'(.+?),?')
+			regex.compile(r'(.+?)(?:,\s*|\z)')
 			var temp: Array = []
 			for i in regex.search_all(buffer.get_string(1)):
 				temp.append(i.get_string().to_int())
@@ -397,21 +402,101 @@ func parse(path: String):
 			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
 		buffer = null
 		
-		#ScoreInit
-		
-		#ScoreDiff
-		
 		#BALLOONNOR:, BALLOONEXP:, BALLOONMAS: (?)
 		
+		#ScoreInit
+		regex.compile(r'(?m)^SCOREINIT:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			chart.ScoreInit = buffer.get_string(1).to_int()
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
+		
+		#ScoreDiff
+		regex.compile(r'(?m)^SCOREDIFF:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			chart.ScoreDiff = buffer.get_string(1).to_int()
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
+				
 		#Style
+		regex.compile(r'(?m)^STYLE:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			chart.Style = buffer.get_string(1)
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
 		
-		#EXAM1:, EXAM2:, EXAM3: (?)
+		#region Exams
+		#Exam1
+		regex.compile(r'(?m)^EXAM1:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			regex.compile(REGEX_ARRAY)
+			var temp: Array = []
+			for i in regex.search_all(buffer.get_string(1)):
+				temp.append(i.get_string())
+			chart.Exam1 = temp
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
 		
-		#GAUGEINCR: (?)
+		#Exam2
+		regex.compile(r'(?m)^EXAM2:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			regex.compile(REGEX_ARRAY)
+			var temp: Array = []
+			for i in regex.search_all(buffer.get_string(1)):
+				temp.append(i.get_string())
+			chart.Exam2 = temp
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
 		
-		#TOTAL: (?)
+		#Exam3
+		regex.compile(r'(?m)^EXAM3:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			regex.compile(REGEX_ARRAY)
+			var temp: Array = []
+			for i in regex.search_all(buffer.get_string(1)):
+				temp.append(i.get_string())
+			chart.Exam3 = temp
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
+		#endregion
 		
-		#HIDDENBRANCH: (?)
+		#GaugeIncr
+		regex.compile(r'(?m)^GAUGEINCR:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			chart.GaugeIncr = buffer.get_string(1)
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
+		
+		#Total
+		regex.compile(r'(?m)^TOTAL:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			chart.Total = buffer.get_string(1)
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
+		
+		#HiddenBranch
+		regex.compile(r'(?m)^HIDDENBRANCH:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			chart.HiddenBranch = buffer.get_string(1) == "1"
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
+		
+		#ChartData
+		regex.compile(r'(?ms)^(#START.*#END)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			chart.ChartData = buffer.get_string(1)
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
 		
 		#Chart
 		regex.compile(r'(?m)^COURSE:(.*)$')
@@ -427,7 +512,6 @@ func parse(path: String):
 			"Oni", "3":
 				ChartOni = chart
 			"Edit", "4", "Ura":
-				print("FLAG")
 				ChartEdit = chart
 			"Tower", "5":
 				ChartTower = chart
@@ -435,6 +519,9 @@ func parse(path: String):
 				ChartDan = chart
 		buffer = null
 	#endregion
+
+func print():
+	print("SONG DATA")
 	print("TITLE: ", Title)
 	print("TITLEJP: ", TitleJP)
 	print("TITLEEN: ", TitleEN)
@@ -454,7 +541,30 @@ func parse(path: String):
 	print("OFFSET: ", Offset)
 	print("DEMOSTART: ", DemoStart)
 	print("")
+	print("GENRE: ", Genre)
+	print("SCOREMODE: ", ScoreMode)
+	print("MAKER: ", Maker)
+	print("SONGVOL: ", SongVol)
+	print("SEVOL: ", SEVol)
+	print("SIDE: ", Side)
+	print("LIFE: ", Life)
+	print("GAME: ", Game)
+	print("HEADSCROLL: ", HeadScroll)
+	print("BGIMAGE: ", BGImage)
+	print("BGMOVIE: ", BGMovie)
+	print("MOVIEOFFSET: ", MovieOffset)
+	print("")
 	if(ChartEdit != null):
 		print("CHARTEDIT FOUND")
-		print("CHARTEDIT LEVEL: ", ChartEdit.Level)
-		print("CHARTEDIT BALLOON: ", ChartEdit.Balloon)
+		print("LEVEL: ", ChartEdit.Level)
+		print("BALLOON: ", ChartEdit.Balloon)
+		print("SCOREINIT: ", ChartEdit.ScoreInit)
+		print("SCOREDIFF: ", ChartEdit.ScoreDiff)
+		print("STYLE: ", ChartEdit.Style)
+		print("EXAM1: ", ChartEdit.Exam1)
+		print("EXAM2: ", ChartEdit.Exam2)
+		print("EXAM3: ", ChartEdit.Exam3)
+		print("GAUGEINCR: ", ChartEdit.GaugeIncr)
+		print("TOTAL: ", ChartEdit.Total)
+		print("HIDDENBRANCH: ", ChartEdit.HiddenBranch)
+		print("DATA: \n", ChartEdit.ChartData)

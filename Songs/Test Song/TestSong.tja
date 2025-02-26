@@ -1,15 +1,48 @@
 //Not a real beatmap. Written in order to test the parser. Feel free to use as a reference.
 
-TITLE:Test Title
+TITLE:Test Title //Midline comment
 TITLEJA:Test Title Japanese
 TITLEEN:Test Title English
 TITLECN:Test Title Chinese
 TITLETW:Test Title Chinese Traditional
 TITLEKO:Test Title Korean
-
 SUBTITLE:Test Subtitle
 SUBTITLEJA:Test Subtitle Japanese
 SUBTITLEEN:Test Subtitle English
 SUBTITLECN:Test Subtitle Chinese
 SUBTITLETW:Test Subtitle Chinese Traditional
 SUBTITLEKO:Test Subtitle Korean
+BPM:150
+WAVE:testsong.ogg
+OFFSET:3.14
+DEMOSTART:1.41
+GENRE:
+SCOREMODE:2
+MAKER:Me
+SONGVOL:111.1
+SEVOL:99.9
+SIDE:Normal
+LIFE:3
+GAME:Taiko
+HEADSCROLL:0.8
+BGIMAGE:bg.png
+BGMOVIE:bg.avi
+MOVIEOFFSET:1.5
+
+COURSE:Edit
+LEVEL:10
+BALLOON:1,2,3
+SCOREINIT:390
+SCOREDIFF:100
+STYLE:Single
+EXAM1:g,98,100,m
+EXAM2:jp,1000,1150,m
+EXAM3:jb,10,5,l
+GAUGEINCR:Normal
+TOTAL:200
+HIDDENBRANCH:0
+
+#START
+010,
+101,
+#END
