@@ -385,9 +385,39 @@ func parse(path: String):
 			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
 		buffer = null
 		
+		#Balloon
+		regex.compile(r'(?m)^BALLOON:(.*)$')
+		buffer = regex.search(staging)
+		if(buffer):
+			regex.compile(r'(.+?),?')
+			var temp: Array = []
+			for i in regex.search_all(buffer.get_string(1)):
+				temp.append(i.get_string().to_int())
+			chart.Balloon = temp
+			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
+		buffer = null
+		
+		#ScoreInit
+		
+		#ScoreDiff
+		
+		#BALLOONNOR:, BALLOONEXP:, BALLOONMAS: (?)
+		
+		#Style
+		
+		#EXAM1:, EXAM2:, EXAM3: (?)
+		
+		#GAUGEINCR: (?)
+		
+		#TOTAL: (?)
+		
+		#HIDDENBRANCH: (?)
+		
+		#Chart
 		regex.compile(r'(?m)^COURSE:(.*)$')
 		buffer = regex.search(staging)
-		match buffer.get_string(1).strip_edges():
+		chart.Course = buffer.get_string(1).strip_edges()
+		match chart.Course:
 			"Easy", "0":
 				ChartEasy = chart
 			"Normal", "1":
@@ -427,3 +457,4 @@ func parse(path: String):
 	if(ChartEdit != null):
 		print("CHARTEDIT FOUND")
 		print("CHARTEDIT LEVEL: ", ChartEdit.Level)
+		print("CHARTEDIT BALLOON: ", ChartEdit.Balloon)
