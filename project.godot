@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gdaiko"
-run/main_scene="res://src/Game/game.tscn"
+run/main_scene="res://src/Intro/intro.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/show_image=false
 
@@ -19,4 +19,8 @@ boot_splash/show_image=false
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
+window/stretch/mode="viewport"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
