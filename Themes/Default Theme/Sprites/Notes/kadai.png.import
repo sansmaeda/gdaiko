@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk7xxgbki5ku1"
-path="res://.godot/imported/rendadai2.png-38a0e2714035212fe1d5d246c23684ae.ctex"
+uid="uid://seb1rq8r7wog"
+path="res://.godot/imported/kadai.png-863d648e5c1c65698d7db855f936e27b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/rendadai2.png"
-dest_files=["res://.godot/imported/rendadai2.png-38a0e2714035212fe1d5d246c23684ae.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/kadai.png"
+dest_files=["res://.godot/imported/kadai.png-863d648e5c1c65698d7db855f936e27b.ctex"]
 
 [params]
 

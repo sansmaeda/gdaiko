@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8c4wcpj7ulr2"
-path="res://.godot/imported/dondai.png-49d124cd106eb91f19b1fbc670f4c273.ctex"
+uid="uid://vmy104wt7pow"
+path="res://.godot/imported/rendastart.png-18ef12ba996d3ec74ce6a45b4835ffa9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/dondai.png"
-dest_files=["res://.godot/imported/dondai.png-49d124cd106eb91f19b1fbc670f4c273.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/rendastart.png"
+dest_files=["res://.godot/imported/rendastart.png-18ef12ba996d3ec74ce6a45b4835ffa9.ctex"]
 
 [params]
 

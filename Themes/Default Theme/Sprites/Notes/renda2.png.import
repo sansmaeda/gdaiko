@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjsyo4yo07qtw"
-path="res://.godot/imported/fuusentail.png-9339aa0a1ad0cb9e997d9a90237a44c4.ctex"
+uid="uid://myr6kl851ndm"
+path="res://.godot/imported/renda2.png-ab893ad5dea5c2a9460c78e904c65eb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/fuusentail.png"
-dest_files=["res://.godot/imported/fuusentail.png-9339aa0a1ad0cb9e997d9a90237a44c4.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/renda2.png"
+dest_files=["res://.godot/imported/renda2.png-ab893ad5dea5c2a9460c78e904c65eb1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnxukhe7wmbud"
-path="res://.godot/imported/fuusen2.png-8ef8f184099e28e06ae4dd3e747bc7cb.ctex"
+uid="uid://8c4wcpj7ulr2"
+path="res://.godot/imported/dondai.png-43795321fa2836d94b53e5141c28e5bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/fuusen2.png"
-dest_files=["res://.godot/imported/fuusen2.png-8ef8f184099e28e06ae4dd3e747bc7cb.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/dondai.png"
+dest_files=["res://.godot/imported/dondai.png-43795321fa2836d94b53e5141c28e5bc.ctex"]
 
 [params]
 

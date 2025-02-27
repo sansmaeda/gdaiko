@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pynnv1k7a3ev"
-path="res://.godot/imported/ka2.png-a79f31ec012048324a14a03c100f33f3.ctex"
+uid="uid://dnxukhe7wmbud"
+path="res://.godot/imported/fuusen2.png-412bccff036f37f8c11081c43f74c4fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/ka2.png"
-dest_files=["res://.godot/imported/ka2.png-a79f31ec012048324a14a03c100f33f3.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/fuusen2.png"
+dest_files=["res://.godot/imported/fuusen2.png-412bccff036f37f8c11081c43f74c4fc.ctex"]
 
 [params]
 

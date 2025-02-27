@@ -1,41 +1,28 @@
-# https://github.com/269Seahorse/Better-taiko-web/blob/master/TJA-format.mediawiki
-# https://outfox.wiki/en/dev/mode-support/tja-support
-# https://iepiweidieng.github.io/TJAPlayer3/tja/
 class_name TJAParser
 extends RefCounted
-##Parses a .tja chart file into accessible data points
+## Parses a .tja chart file into accessible data points
+##
+## @tutorial: https://iepiweidieng.github.io/TJAPlayer3/tja/
+## @tutorial: https://github.com/269Seahorse/Better-taiko-web/blob/master/TJA-format.mediawiki
+## @tutorial: https://outfox.wiki/en/dev/mode-support/tja-support
 
 const REGEX_ARRAY: String = r'(.+?)\s*(?:,\s*|\z)'
 
 #region Song Metadata Variables
 ##Title of the song. (Default)
-var Title: String
+var title: String
 ##Title of the song. (Japanese)
-var TitleJP: String
+var title_ja: String
 ##Title of the song. (English)
-var TitleEN: String
-##Title of the song. (Simplified Chinese)
-var TitleCN: String
-##Title of the song. (Traditional Chinese)
-var TitleTW: String
-##Title of the song. (Korean)
-var TitleKO: String
+var title_en: String
 
 ##Subtitle of the song. Shown under the title in the song selector.
-var Subtitle: String
+var subtitle: String
 ##Japanese subtitle
-var SubtitleJP: String
+var subtitle_ja: String
 ##English subtitle
-var SubtitleEN: String
-##Chinese subtitle
-var SubtitleCN: String
-##Traditional Chinese subtitle
-var SubtitleTW: String
-##Korean subtitle
-var SubtitleKO: String
+var subtitle_en: String
 
-##Initial BPM of the song. Can be changed mid-song.
-var BPM: float = 120
 ##Path to the song audio file used during gameplay. Located in the same folder as the TJA.
 var Wave: String
 ##Offset of the notes in seconds.
@@ -43,23 +30,23 @@ var Offset: float
 ##Offset of the title gameplay demonstration for the song
 var DemoStart: float
 
-##Genre of the song. Determines which folder the song appears in.
-var Genre: String
+##Initial BPM of the song. Can be changed mid-song.
+var BPM: float = 120
+##Initial scrolling speed. #SCROLL in the chart is multiplied by this.
+var HeadScroll: float = 1
 var ScoreMode: int = 1
-##Chart creator
-var Maker: String
-#Not used
-#var Lyrics: String
 ##Volume multiplier for the music file
 var SongVol: float = 100
 ##Ingame SFX volume multiplier
 var SEVol: float = 100
-var Side: String = "Normal" #Normal/1, EX/2, Both/3
 ##Replaces gauge if other than 0. Number of misses before failing the song.
 var Life: int = 0
-var Game: String = "Taiko" #Taiko/Jube
-##Initial scrolling speed. #SCROLL in the chart is multiplied by this.
-var HeadScroll: float = 1
+
+##Genre of the song. Determines which folder the song appears in.
+var Genre: String
+##Chart creator
+var Maker: String
+var Side: String = "Normal" #Normal/1, EX/2, Both/3
 
 var BGImage: String
 var BGMovie: String
@@ -112,6 +99,7 @@ var ChartTower: Chart
 var ChartDan: Chart
 #endregion
 
+##Loads the data from a tja file
 func parse(path: String):
 	var file := FileAccess.open(path, FileAccess.READ)
 	var text: String = file.get_as_text()
@@ -149,7 +137,7 @@ func parse(path: String):
 	regex.compile(r'(?m)^TITLE:(.*)$')
 	buffer = regex.search(text)
 	if(buffer):
-		Title = buffer.get_string(1)
+		title = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
@@ -157,7 +145,7 @@ func parse(path: String):
 	regex.compile(r'(?m)^TITLEJA:(.*)$')
 	buffer = regex.search(text)
 	if(buffer):
-		TitleJP = buffer.get_string(1)
+		title_ja = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
@@ -165,31 +153,7 @@ func parse(path: String):
 	regex.compile(r'(?m)^TITLEEN:(.*)$')
 	buffer = regex.search(text)
 	if(buffer):
-		TitleEN = buffer.get_string(1)
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
-	buffer = null
-	
-	#TitleCN
-	regex.compile(r'(?m)^TITLECN:(.*)$')
-	buffer = regex.search(text)
-	if(buffer):
-		TitleCN = buffer.get_string(1)
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
-	buffer = null
-	
-	#TitleTW
-	regex.compile(r'(?m)^TITLETW:(.*)$')
-	buffer = regex.search(text)
-	if(buffer):
-		TitleTW = buffer.get_string(1)
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
-	buffer = null
-	
-	#TitleKO
-	regex.compile(r'(?m)^TITLEKO:(.*)$')
-	buffer = regex.search(text)
-	if(buffer):
-		TitleKO = buffer.get_string(1)
+		title_en = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	#endregion
@@ -199,7 +163,7 @@ func parse(path: String):
 	regex.compile(r'(?m)^SUBTITLE:(.*)$')
 	buffer = regex.search(text)
 	if(buffer):
-		Subtitle = buffer.get_string(1)
+		subtitle = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
@@ -207,7 +171,7 @@ func parse(path: String):
 	regex.compile(r'(?m)^SUBTITLEJA:(.*)$')
 	buffer = regex.search(text)
 	if(buffer):
-		SubtitleJP = buffer.get_string(1)
+		subtitle_ja = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
@@ -215,31 +179,7 @@ func parse(path: String):
 	regex.compile(r'(?m)^SUBTITLEEN:(.*)$')
 	buffer = regex.search(text)
 	if(buffer):
-		SubtitleEN = buffer.get_string(1)
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
-	buffer = null
-	
-	#SubtitleCN
-	regex.compile(r'(?m)^SUBTITLECN:(.*)$')
-	buffer = regex.search(text)
-	if(buffer):
-		SubtitleCN = buffer.get_string(1)
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
-	buffer = null
-	
-	#SubtitleTW
-	regex.compile(r'(?m)^SUBTITLETW:(.*)$')
-	buffer = regex.search(text)
-	if(buffer):
-		SubtitleTW = buffer.get_string(1)
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
-	buffer = null
-	
-	#SubtitleKO
-	regex.compile(r'(?m)^SUBTITLEKO:(.*)$')
-	buffer = regex.search(text)
-	if(buffer):
-		SubtitleKO = buffer.get_string(1)
+		subtitle_en = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	#endregion
@@ -332,14 +272,6 @@ func parse(path: String):
 	buffer = regex.search(text)
 	if(buffer):
 		Life = buffer.get_string().to_int()
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
-	buffer = null
-	
-	#Game
-	regex.compile(r'(?m)^GAME:(.*)$')
-	buffer = regex.search(text)
-	if(buffer):
-		Game = buffer.get_string(1)
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	
@@ -522,19 +454,13 @@ func parse(path: String):
 
 func print():
 	print("SONG DATA")
-	print("TITLE: ", Title)
-	print("TITLEJP: ", TitleJP)
-	print("TITLEEN: ", TitleEN)
-	print("TITLECN: ", TitleCN)
-	print("TITLETW: ", TitleTW)
-	print("TITLEKO: ", TitleKO)
+	print("TITLE: ", title)
+	print("TITLEJP: ", title_ja)
+	print("TITLEEN: ", title_en)
 	print("")
-	print("SUBTITLE: ", Subtitle)
-	print("SUBTITLEJP: ", SubtitleJP)
-	print("SUBTITLEEN: ", SubtitleEN)
-	print("SUBTITLECN: ", SubtitleCN)
-	print("SUBTITLETW: ", SubtitleTW)
-	print("SUBTITLEKO: ", SubtitleKO)
+	print("SUBTITLE: ", subtitle)
+	print("SUBTITLEJP: ", subtitle_ja)
+	print("SUBTITLEEN: ", subtitle_en)
 	print("")
 	print("BPM: ", BPM)
 	print("WAVE: ", Wave)
@@ -548,7 +474,6 @@ func print():
 	print("SEVOL: ", SEVol)
 	print("SIDE: ", Side)
 	print("LIFE: ", Life)
-	print("GAME: ", Game)
 	print("HEADSCROLL: ", HeadScroll)
 	print("BGIMAGE: ", BGImage)
 	print("BGMOVIE: ", BGMovie)

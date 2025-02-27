@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://680y86dgjab6"
-path="res://.godot/imported/rendaend.png-b229a45d785172888ee1f9dda483fe73.ctex"
+uid="uid://d2pcwhlmhrej5"
+path="res://.godot/imported/rendadai.png-f89af8685545809016a66db6e647ebba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/rendaend.png"
-dest_files=["res://.godot/imported/rendaend.png-b229a45d785172888ee1f9dda483fe73.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/rendadai.png"
+dest_files=["res://.godot/imported/rendadai.png-f89af8685545809016a66db6e647ebba.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0jhrxpyf03ug"
-path="res://.godot/imported/kadai2.png-6246c91aafbf5d463fbeca3cf3b77873.ctex"
+uid="uid://bjsyo4yo07qtw"
+path="res://.godot/imported/fuusentail.png-dddece5a5e2dc19b9c8110f45657ec25.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/kadai2.png"
-dest_files=["res://.godot/imported/kadai2.png-6246c91aafbf5d463fbeca3cf3b77873.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/fuusentail.png"
+dest_files=["res://.godot/imported/fuusentail.png-dddece5a5e2dc19b9c8110f45657ec25.ctex"]
 
 [params]
 

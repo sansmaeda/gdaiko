@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://myr6kl851ndm"
-path="res://.godot/imported/renda2.png-325bba585ee57e82e025a4479578cf21.ctex"
+uid="uid://bld4itbp6n30o"
+path="res://.godot/imported/renda.png-4a1e989aebb35d6e6fcb78cc196327bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/renda2.png"
-dest_files=["res://.godot/imported/renda2.png-325bba585ee57e82e025a4479578cf21.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/renda.png"
+dest_files=["res://.godot/imported/renda.png-4a1e989aebb35d6e6fcb78cc196327bd.ctex"]
 
 [params]
 

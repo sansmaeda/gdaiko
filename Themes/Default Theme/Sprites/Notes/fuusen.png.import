@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0qixcp5uuvvl"
-path="res://.godot/imported/fuusen.png-299241567328b4ae68c3f304167e33ef.ctex"
+path="res://.godot/imported/fuusen.png-d31325f6ddad58b8d861da779afb14ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Themes/Default Theme/Sprites/fuusen.png"
-dest_files=["res://.godot/imported/fuusen.png-299241567328b4ae68c3f304167e33ef.ctex"]
+source_file="res://Themes/Default Theme/Sprites/Notes/fuusen.png"
+dest_files=["res://.godot/imported/fuusen.png-d31325f6ddad58b8d861da779afb14ff.ctex"]
 
 [params]
 
