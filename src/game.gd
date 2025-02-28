@@ -15,6 +15,18 @@ var _score_p1: Score
 var _score_p2: Score
 var _parser: TJAParser
 
+var chart_easy: Chart
+var chart_normal: Chart
+var chart_hard: Chart
+var chart_edit: Chart
+
+var wave: String
+var offset: float
+var bpm: float
+var head_scroll: float = 1
+var data: String
+
+
 func _init(path: String):
 	self.path = path
 
@@ -29,9 +41,46 @@ func _ready():
 	subtitle = _parser.subtitle
 	subtitle_ja = _parser.subtitle_ja
 	subtitle_en = _parser.subtitle_en
-	print(title)
-
+	
+	chart_easy = _parser.chart_easy
+	chart_normal = _parser.chart_normal
+	chart_hard = _parser.chart_hard
+	chart_edit = _parser.chart_edit
+	
+	wave = _parser.wave
+	offset = _parser.offset
+	bpm = _parser.bpm
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+##Class containing data used by an individual chart
+class Chart:
+	
+	##Difficulty of the chart. (EG. Oni)
+	var course: String
+	##Number of stars 
+	var level: int
+	
+	##Array containing balloon int values
+	var balloon: Array
+	
+	##Used for score calculation
+	var score_init: int
+	var score_diff: int
+	var style: String
+	
+	##Dojo bars
+	var exam1: Array
+	var exam2: Array
+	var exam3: Array
+	
+	##Rounding method for gauge
+	var gauge_incr: String
+	##Percentage multiplier for notes effectiveness in gauge
+	var total: float
+	var hidden_branch: bool
+	
+	##Contains the actual data of the chart
+	var data: String

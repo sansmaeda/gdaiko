@@ -13,6 +13,7 @@ config_version=5
 config/name="gdaiko"
 run/main_scene="res://src/Intro/intro.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=1000
 boot_splash/show_image=false
 
 [display]

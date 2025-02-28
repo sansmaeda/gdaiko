@@ -1,12 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://nepmo5wepcke"]
+[gd_scene load_steps=5 format=3 uid="uid://nepmo5wepcke"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/Game/game.gd" id="1_7j4fm"]
-[ext_resource type="Texture2D" uid="uid://j4fy8gk0o01g" path="res://Themes/Default Theme/Sprites/Notes/don2.png" id="2_dabjo"]
-[ext_resource type="Texture2D" uid="uid://8c4wcpj7ulr2" path="res://Themes/Default Theme/Sprites/Notes/dondai.png" id="3_yb7x0"]
-[ext_resource type="Texture2D" uid="uid://bslpcnn875nxl" path="res://Themes/Default Theme/Sprites/Notes/dondai2.png" id="4_xc7wp"]
 [ext_resource type="Texture2D" uid="uid://djgg5th4dsu4e" path="res://Themes/Default Theme/Sprites/track.png" id="5_0c4ag"]
 [ext_resource type="FontFile" uid="uid://c4ppcb7j6tido" path="res://Themes/Default Theme/大江戸勘亭流 Std E.otf" id="6_i1wtb"]
-[ext_resource type="Texture2D" uid="uid://cbbrgy2kuj4e4" path="res://Themes/Default Theme/Sprites/Notes/don.png" id="7_qh0gp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bemav"]
 font = ExtResource("6_i1wtb")
@@ -23,30 +19,15 @@ texture = ExtResource("5_0c4ag")
 centered = false
 
 [node name="Title" type="Label" parent="."]
-offset_left = 263.0
 offset_top = 7.0
-offset_right = 374.0
+offset_right = 372.0
 offset_bottom = 22.0
-text = "Title タイトル"
+text = "Title"
 label_settings = SubResource("LabelSettings_bemav")
 horizontal_alignment = 2
 vertical_alignment = 1
-clip_text = true
 
 [node name="Notes" type="Node2D" parent="."]
+position = Vector2(124, 77)
 
-[node name="Don3" type="Sprite2D" parent="."]
-position = Vector2(34, 11)
-texture = ExtResource("2_dabjo")
-
-[node name="Dondai" type="Sprite2D" parent="."]
-position = Vector2(62, 16)
-texture = ExtResource("3_yb7x0")
-
-[node name="Dondai2" type="Sprite2D" parent="."]
-position = Vector2(95, 16)
-texture = ExtResource("4_xc7wp")
-
-[node name="Don" type="Sprite2D" parent="."]
-position = Vector2(12, 11)
-texture = ExtResource("7_qh0gp")
+[node name="Wave" type="AudioStreamPlayer" parent="."]

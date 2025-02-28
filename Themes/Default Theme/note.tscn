@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm2bk22tl4f2x"]
+
+[ext_resource type="Script" path="res://Themes/Default Theme/note.gd" id="1_usxd4"]
+[ext_resource type="Texture2D" uid="uid://cbbrgy2kuj4e4" path="res://Themes/Default Theme/Sprites/Notes/don.png" id="2_de5r0"]
+
+[node name="Note" type="Node2D"]
+script = ExtResource("1_usxd4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_de5r0")
