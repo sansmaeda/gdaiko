@@ -2,6 +2,10 @@ extends Node
 class_name Game
 ##Handles game logic. Themes should use this in order to get the game state.
 
+const FUKA: float = 0.108
+const KA: float = 0.075
+const RYOU: float = 0.025
+
 var path: String
 
 var title: String
@@ -11,8 +15,6 @@ var subtitle: String
 var subtitle_ja: String
 var subtitle_en: String
 
-var _score_p1: Score
-var _score_p2: Score
 var _parser: TJAParser
 
 var chart_easy: Chart
@@ -25,6 +27,8 @@ var offset: float
 var bpm: float
 var head_scroll: float = 1
 var data: String
+
+var score_mode: int
 
 
 func _init(path: String):
@@ -50,6 +54,8 @@ func _ready():
 	wave = _parser.wave
 	offset = _parser.offset
 	bpm = _parser.bpm
+	
+	score_mode = _parser.score_mode
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

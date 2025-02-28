@@ -11,26 +11,31 @@ var speed: float
 ## 5: Drumroll[br]
 ## 6: Drumroll (big)[br]
 ## 7: Balloon[br]
+## 8: End balloon/roll[br]
 ## 9: Kusudama[br]
 ## A: Don (both)[br]
 ## B: Ka (both)
 var type: String
-#
-#func _init(type: String, speed: float):
-	#self.type = type
-	#self.speed = speed
+var roll_count: int
+var time: float
+var score: Score
+var input: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	match type:
 		"1":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/don.png")
+			input = "don"
 		"2":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/ka.png")
+			input = "ka"
 		"3":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/dondai.png")
+			input = "don"
 		"4":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/kadai.png")
+			input = "ka"
 		"5":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/renda.png")
 		"6":
@@ -47,3 +52,34 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.x -= speed * delta
+	match type:
+		"1", "2", "3", "4":
+			if get_parent().get_child(-1) == self && \
+			Input.is_action_just_pressed(input) && \
+			abs(position.x) < speed * Game.RYOU:
+				queue_free()
+				score.add(0)
+			elif get_parent().get_child(-1) == self && \
+			Input.is_action_just_pressed(input) && \
+			abs(position.x) < speed * Game.KA:
+				queue_free()
+				score.add(1)
+			elif position.x < -speed * Game.FUKA:
+				queue_free()
+				score.add(2)
+		"5", "6", "7", "9":
+			if get_parent().get_child(-1) == self && \
+			(Input.is_action_just_pressed("don") || \
+			Input.is_action_just_pressed("ka")) && \
+			abs(position.x) < speed * Game.RYOU:
+				queue_free()
+				score.add(0)
+			elif get_parent().get_child(-1) == self && \
+			(Input.is_action_just_pressed("don") || \
+			Input.is_action_just_pressed("ka")) && \
+			abs(position.x) < speed * Game.KA:
+				queue_free()
+				score.add(1)
+			elif position.x < -speed * Game.FUKA:
+				queue_free()
+				score.add(2)

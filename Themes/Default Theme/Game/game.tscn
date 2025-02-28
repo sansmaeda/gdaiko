@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://nepmo5wepcke"]
+[gd_scene load_steps=6 format=3 uid="uid://nepmo5wepcke"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/Game/game.gd" id="1_7j4fm"]
 [ext_resource type="Texture2D" uid="uid://djgg5th4dsu4e" path="res://Themes/Default Theme/Sprites/track.png" id="5_0c4ag"]
@@ -7,6 +7,12 @@
 [sub_resource type="LabelSettings" id="LabelSettings_bemav"]
 font = ExtResource("6_i1wtb")
 font_size = 11
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_838n0"]
+font = ExtResource("6_i1wtb")
+font_size = 12
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -31,3 +37,19 @@ vertical_alignment = 1
 position = Vector2(124, 77)
 
 [node name="Wave" type="AudioStreamPlayer" parent="."]
+
+[node name="Combo" type="Label" parent="."]
+offset_left = 81.0
+offset_top = 69.0
+offset_right = 121.0
+offset_bottom = 92.0
+text = "12"
+label_settings = SubResource("LabelSettings_838n0")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 53.0
+offset_top = 33.0
+offset_right = 93.0
+offset_bottom = 56.0
+text = "12"
+label_settings = SubResource("LabelSettings_838n0")
