@@ -24,10 +24,10 @@ var input: String
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	match type:
-		"1":
+		"1", "A":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/don.png")
 			input = "don"
-		"2":
+		"2", "B":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/ka.png")
 			input = "ka"
 		"3":

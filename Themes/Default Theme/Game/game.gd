@@ -146,7 +146,14 @@ func _ready():
 func _process(delta):
 	$Combo.text = str(_score_p1.combo)
 	$Score.text = str(_score_p1.score)
-	
+	if(Input.is_action_just_pressed("don_left")):
+		$"Taiko/Don Left".play("play")
+	if(Input.is_action_just_pressed("don_right")):
+		$"Taiko/Don Right".play("play")
+	if(Input.is_action_just_pressed("ka_left")):
+		$"Taiko/Ka Left".play("play")
+	if(Input.is_action_just_pressed("ka_right")):
+		$"Taiko/Ka Right".play("play")
 	#if($Wave.finished && $Notes.get_children().size() == 0):
 		#await get_tree().create_timer(1.0).timeout
 		#get_tree().change_scene_to_file("res://Themes/Default Theme/main.tscn")

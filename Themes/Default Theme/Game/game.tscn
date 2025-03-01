@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://nepmo5wepcke"]
+[gd_scene load_steps=25 format=3 uid="uid://nepmo5wepcke"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/Game/game.gd" id="1_7j4fm"]
 [ext_resource type="Texture2D" uid="uid://beghdesp6mcql" path="res://Themes/Default Theme/Sprites/taiko.png" id="4_ujq87"]
@@ -9,12 +9,166 @@
 [ext_resource type="FontFile" uid="uid://c4ppcb7j6tido" path="res://Themes/Default Theme/大江戸勘亭流 Std E.otf" id="6_i1wtb"]
 [ext_resource type="Texture2D" uid="uid://x1xiohydudcn" path="res://Themes/Default Theme/Sprites/taiko_don_left.png" id="7_6iu8a"]
 [ext_resource type="Texture2D" uid="uid://7ho4sp2odea8" path="res://Themes/Default Theme/Sprites/taiko_don_right.png" id="8_60vvy"]
+[ext_resource type="Texture2D" uid="uid://ddnd51k0wl3s5" path="res://Themes/Default Theme/Sprites/frame.png" id="9_1at6w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bemav"]
 font = ExtResource("6_i1wtb")
 font_size = 11
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_wf8si"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Don Left Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ekprw"]
+resource_name = "play"
+length = 0.0833
+step = 0.0833
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Don Left Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_80lmv"]
+_data = {
+"RESET": SubResource("Animation_wf8si"),
+"play": SubResource("Animation_ekprw")
+}
+
+[sub_resource type="Animation" id="Animation_p5moj"]
+resource_name = "play"
+length = 0.0833
+step = 0.0833
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Don Right Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_23enb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Don Right Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5mns"]
+_data = {
+"RESET": SubResource("Animation_23enb"),
+"play": SubResource("Animation_p5moj")
+}
+
+[sub_resource type="Animation" id="Animation_3i5p5"]
+resource_name = "play"
+length = 0.0833
+step = 0.0833
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Taiko/Ka Left Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_qvv5q"]
+resource_name = "RESET"
+step = 0.0833
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Taiko/Ka Left Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_en6kh"]
+_data = {
+"RESET": SubResource("Animation_qvv5q"),
+"play": SubResource("Animation_3i5p5")
+}
+
+[sub_resource type="Animation" id="Animation_a8e2r"]
+resource_name = "play"
+length = 0.0833
+step = 0.0833
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ka Right Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_5ywas"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ka Right Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldg8i"]
+_data = {
+"RESET": SubResource("Animation_5ywas"),
+"play": SubResource("Animation_a8e2r")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_p21in"]
 font = ExtResource("6_i1wtb")
@@ -25,10 +179,15 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Game" type="Node2D"]
 script = ExtResource("1_7j4fm")
 
+[node name="Wave" type="AudioStreamPlayer" parent="."]
+
 [node name="Track" type="Sprite2D" parent="."]
 position = Vector2(100, 58)
 texture = ExtResource("5_0c4ag")
 centered = false
+
+[node name="Notes" type="Node2D" parent="."]
+position = Vector2(124, 77)
 
 [node name="Title" type="Label" parent="."]
 offset_top = 7.0
@@ -39,15 +198,60 @@ label_settings = SubResource("LabelSettings_bemav")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Notes" type="Node2D" parent="."]
-position = Vector2(124, 77)
-
 [node name="Taiko" type="Sprite2D" parent="."]
-position = Vector2(64, 63)
+position = Vector2(65, 63)
 texture = ExtResource("4_ujq87")
 centered = false
 
-[node name="Wave" type="AudioStreamPlayer" parent="."]
+[node name="Don Left" type="AnimationPlayer" parent="Taiko"]
+libraries = {
+"": SubResource("AnimationLibrary_80lmv")
+}
+
+[node name="Don Left Image" type="Sprite2D" parent="Taiko"]
+visible = false
+position = Vector2(6, 5)
+texture = ExtResource("7_6iu8a")
+centered = false
+
+[node name="Don Right" type="AnimationPlayer" parent="Taiko"]
+libraries = {
+"": SubResource("AnimationLibrary_h5mns")
+}
+
+[node name="Don Right Image" type="Sprite2D" parent="Taiko"]
+visible = false
+position = Vector2(16, 5)
+texture = ExtResource("8_60vvy")
+centered = false
+
+[node name="Ka Left" type="AnimationPlayer" parent="Taiko"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_en6kh")
+}
+
+[node name="Ka Left Image" type="Sprite2D" parent="Taiko"]
+visible = false
+position = Vector2(2, 1)
+texture = ExtResource("5_757hx")
+centered = false
+
+[node name="Ka Right" type="AnimationPlayer" parent="Taiko"]
+libraries = {
+"": SubResource("AnimationLibrary_ldg8i")
+}
+
+[node name="Ka Right Image" type="Sprite2D" parent="Taiko"]
+visible = false
+position = Vector2(16, 1)
+texture = ExtResource("6_cbjxg")
+centered = false
+
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(0, 55)
+texture = ExtResource("9_1at6w")
+centered = false
 
 [node name="Score" type="Label" parent="."]
 offset_top = 59.0
@@ -55,35 +259,12 @@ offset_right = 54.0
 offset_bottom = 82.0
 text = "1234567890"
 label_settings = SubResource("LabelSettings_p21in")
-
-[node name="TaikoKaLeft" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(66, 64)
-texture = ExtResource("5_757hx")
-centered = false
-
-[node name="TaikoKaRight" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(81, 64)
-texture = ExtResource("6_cbjxg")
-centered = false
-
-[node name="TaikoDonLeft" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(70, 68)
-texture = ExtResource("7_6iu8a")
-centered = false
-
-[node name="TaikoDonRight" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(81, 68)
-texture = ExtResource("8_60vvy")
-centered = false
+horizontal_alignment = 2
 
 [node name="Combo" type="Label" parent="."]
-offset_left = 60.0
+offset_left = 61.0
 offset_top = 69.0
-offset_right = 100.0
+offset_right = 101.0
 offset_bottom = 83.0
 text = "10000"
 label_settings = ExtResource("5_4nkvh")
