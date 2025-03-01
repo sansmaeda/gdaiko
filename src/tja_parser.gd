@@ -318,7 +318,7 @@ func parse(path: String):
 			chart.score_diff = buffer.get_string(1).strip_escapes().to_int()
 			staging = staging.erase(buffer.get_start(), buffer.get_string().length()+1)
 		buffer = null
-				
+		
 		#Style
 		regex.compile(r'(?m)^STYLE:(.*)$')
 		buffer = regex.search(staging)
@@ -418,45 +418,3 @@ func parse(path: String):
 				chart_dan = chart
 		buffer = null
 	#endregion
-
-func print():
-	print("SONG DATA")
-	print("TITLE: ", title)
-	print("TITLEJP: ", title_ja)
-	print("TITLEEN: ", title_en)
-	print("")
-	print("SUBTITLE: ", subtitle)
-	print("SUBTITLEJP: ", subtitle_ja)
-	print("SUBTITLEEN: ", subtitle_en)
-	print("")
-	print("BPM: ", bpm)
-	print("WAVE: ", wave)
-	print("OFFSET: ", offset)
-	print("DEMOSTART: ", demo_start)
-	print("")
-	print("GENRE: ", genre)
-	print("SCOREMODE: ", score_mode)
-	print("MAKER: ", maker)
-	print("SONGVOL: ", song_vol)
-	print("SEVOL: ", se_vol)
-	print("SIDE: ", side)
-	print("LIFE: ", life)
-	print("HEADSCROLL: ", head_scroll)
-	print("BGIMAGE: ", bg_image)
-	print("BGMOVIE: ", bg_movie)
-	print("MOVIEOFFSET: ", movie_offset)
-	print("")
-	if(chart_edit != null):
-		print("CHARTEDIT FOUND")
-		print("LEVEL: ", chart_edit.level)
-		print("BALLOON: ", chart_edit.balloon)
-		print("SCOREINIT: ", chart_edit.score_init)
-		print("SCOREDIFF: ", chart_edit.score_diff)
-		print("STYLE: ", chart_edit.style)
-		print("EXAM1: ", chart_edit.exam1)
-		print("EXAM2: ", chart_edit.exam2)
-		print("EXAM3: ", chart_edit.exam3)
-		print("GAUGEINCR: ", chart_edit.gauge_incr)
-		print("TOTAL: ", chart_edit.total)
-		print("HIDDENBRANCH: ", chart_edit.hidden_branch)
-		print("DATA: \n", chart_edit.data)

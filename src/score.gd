@@ -24,4 +24,4 @@ func add(quality: int):
 			score += init + min(10, floor(combo/10.0))
 		3: 
 			score += init * int(quality==0)
-	print("Hit ", quality, " Combo ", combo)
+	#print("Hit ", quality, " Combo ", combo)

@@ -1,4 +1,5 @@
 extends Node
+
 var title: String
 var game: Game = Game.new("res://Songs/Test Song/TestSong.tja")
 var course: String = "Edit"
@@ -15,7 +16,6 @@ var _roll_active: bool = false
 var _score_p1: Score
 var _score_p2: Score
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	#region Init
 	add_child(game)
@@ -24,7 +24,6 @@ func _ready():
 	_offset = game.offset
 	_bpm = game.bpm
 	print(_bpm)
-	print(-_offset)
 	if(TranslationServer.get_locale() == "ja" && game.title_ja != ""):
 		$Title.text = game.title_ja
 	elif(TranslationServer.get_locale() == "en" && game.title_en != ""):
@@ -51,6 +50,7 @@ func _ready():
 	for i: RegExMatch in regex.search_all(_chart.data):
 		var blob: String = i.get_string(1).strip_edges()
 		var note_count: int = 0
+		var measure_total = 60 * _measure * 4 / _bpm
 		
 		#Get note count in measure
 		#Ignore lines starting with #
@@ -61,22 +61,24 @@ func _ready():
 			if(!line.begins_with("#")):
 				note_count += line.length()
 		for a: RegExMatch in b:
-			var line: String = a.get_string(1).strip_edges()
+			print("|",a.get_string(), "|\n")
+			var line: String = a.get_string(1)
 			var buffer: RegExMatch
 			if(line.begins_with("#")):
-				if(line.begins_with("")):
-					pass
-				elif(line.begins_with("#START")):
+				#if(line.begins_with("")):
+					#pass
+				if(line.begins_with("#START")):
 					pass
 				elif(line.begins_with("#END")):
 					pass
-				elif(line.begins_with("#LYRIC")):
-					pass
+				#elif(line.begins_with("#LYRIC")):
+					#pass
 				
 				elif(line.begins_with("#MEASURE")):
 					regex.compile(r'^#MEASURE (.*)\/(.*)$')
 					buffer = regex.search(line)
 					_measure = buffer.get_string(1).to_float() / buffer.get_string(2).to_float()
+					print("MEASURE: ", _measure)
 					buffer = null
 				
 				elif(line.begins_with("#BPMCHANGE ")):
@@ -118,9 +120,10 @@ func _ready():
 					pass
 				elif(line.begins_with("#NEXTSONG")):
 					pass
+				measure_total = 60 * _measure * 4 / _bpm
+			elif line.length()==0:
+				prev_time += measure_total
 			else:
-				print(line)
-				var measure_total = 60 * _measure * 4 / _bpm
 				for n in range(0, line.length()):
 					if(line[n] != "0" && line[n] != "8"):
 						var new_note: Note = note.instantiate()
@@ -140,7 +143,10 @@ func _ready():
 					if(_balloon_active):
 						pass
 					prev_time += measure_total / note_count
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$Combo.text = str(_score_p1.combo)
 	$Score.text = str(_score_p1.score)
+	
+	#if($Wave.finished && $Notes.get_children().size() == 0):
+		#await get_tree().create_timer(1.0).timeout
+		#get_tree().change_scene_to_file("res://Themes/Default Theme/main.tscn")

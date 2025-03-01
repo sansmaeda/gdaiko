@@ -38,10 +38,13 @@ func _ready() -> void:
 			input = "ka"
 		"5":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/renda.png")
+			input = "either"
 		"6":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/rendadai.png")
+			input = "either"
 		"7":
 			$Sprite2D.texture = load("res://Themes/Default Theme/Sprites/Notes/fuusen.png")
+			input = "either"
 		"8":
 			pass
 		"9":
@@ -52,34 +55,27 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.x -= speed * delta
-	match type:
-		"1", "2", "3", "4":
-			if get_parent().get_child(-1) == self && \
-			Input.is_action_just_pressed(input) && \
-			abs(position.x) < speed * Game.RYOU:
-				queue_free()
-				score.add(0)
-			elif get_parent().get_child(-1) == self && \
-			Input.is_action_just_pressed(input) && \
-			abs(position.x) < speed * Game.KA:
-				queue_free()
-				score.add(1)
-			elif position.x < -speed * Game.FUKA:
-				queue_free()
-				score.add(2)
-		"5", "6", "7", "9":
-			if get_parent().get_child(-1) == self && \
-			(Input.is_action_just_pressed("don") || \
-			Input.is_action_just_pressed("ka")) && \
-			abs(position.x) < speed * Game.RYOU:
-				queue_free()
-				score.add(0)
-			elif get_parent().get_child(-1) == self && \
-			(Input.is_action_just_pressed("don") || \
-			Input.is_action_just_pressed("ka")) && \
-			abs(position.x) < speed * Game.KA:
-				queue_free()
-				score.add(1)
-			elif position.x < -speed * Game.FUKA:
-				queue_free()
-				score.add(2)
+	if get_parent().get_child(-1) == self && \
+	match_input(input) && \
+	abs(position.x) < speed * Game.RYOU:
+		queue_free()
+		score.add(0)
+	elif get_parent().get_child(-1) == self && \
+	match_input(input) && \
+	abs(position.x) < speed * Game.KA:
+		queue_free()
+		score.add(1)
+	elif position.x < -speed * Game.FUKA:
+		queue_free()
+		score.add(2)
+func match_input(input: String) -> bool:
+	match input:
+		"don":
+			return Input.is_action_just_pressed("don_left") || Input.is_action_just_pressed("don_right")
+			print("flag")
+		"ka":
+			return Input.is_action_just_pressed("ka_left") || Input.is_action_just_pressed("ka_right")
+		"either":
+			return match_input("don") || match_input("ka")
+		_:
+			return false

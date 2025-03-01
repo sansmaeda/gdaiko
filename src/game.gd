@@ -1,5 +1,5 @@
-extends Node
 class_name Game
+extends Node
 ##Handles game logic. Themes should use this in order to get the game state.
 
 const FUKA: float = 0.108
@@ -20,6 +20,7 @@ var _parser: TJAParser
 var chart_easy: Chart
 var chart_normal: Chart
 var chart_hard: Chart
+var chart_oni: Chart
 var chart_edit: Chart
 
 var wave: String
@@ -49,6 +50,7 @@ func _ready():
 	chart_easy = _parser.chart_easy
 	chart_normal = _parser.chart_normal
 	chart_hard = _parser.chart_hard
+	chart_oni = _parser.chart_oni
 	chart_edit = _parser.chart_edit
 	
 	wave = _parser.wave
@@ -56,6 +58,7 @@ func _ready():
 	bpm = _parser.bpm
 	
 	score_mode = _parser.score_mode
+	head_scroll = _parser.head_scroll
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -73,8 +76,8 @@ class Chart:
 	var balloon: Array
 	
 	##Used for score calculation
-	var score_init: int
-	var score_diff: int
+	var score_init: int = 100
+	var score_diff: int = 100
 	var style: String
 	
 	##Dojo bars

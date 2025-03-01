@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://nepmo5wepcke"]
+[gd_scene load_steps=12 format=3 uid="uid://nepmo5wepcke"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/Game/game.gd" id="1_7j4fm"]
+[ext_resource type="Texture2D" uid="uid://beghdesp6mcql" path="res://Themes/Default Theme/Sprites/taiko.png" id="4_ujq87"]
 [ext_resource type="Texture2D" uid="uid://djgg5th4dsu4e" path="res://Themes/Default Theme/Sprites/track.png" id="5_0c4ag"]
+[ext_resource type="LabelSettings" uid="uid://csdm165pf6b4f" path="res://Themes/Default Theme/Sprites/combo_normal.tres" id="5_4nkvh"]
+[ext_resource type="Texture2D" uid="uid://iby7nauvyoue" path="res://Themes/Default Theme/Sprites/taiko_ka_left.png" id="5_757hx"]
+[ext_resource type="Texture2D" uid="uid://vmb84cvuw4j6" path="res://Themes/Default Theme/Sprites/taiko_ka_right.png" id="6_cbjxg"]
 [ext_resource type="FontFile" uid="uid://c4ppcb7j6tido" path="res://Themes/Default Theme/大江戸勘亭流 Std E.otf" id="6_i1wtb"]
+[ext_resource type="Texture2D" uid="uid://x1xiohydudcn" path="res://Themes/Default Theme/Sprites/taiko_don_left.png" id="7_6iu8a"]
+[ext_resource type="Texture2D" uid="uid://7ho4sp2odea8" path="res://Themes/Default Theme/Sprites/taiko_don_right.png" id="8_60vvy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bemav"]
 font = ExtResource("6_i1wtb")
@@ -10,10 +16,10 @@ font_size = 11
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_838n0"]
+[sub_resource type="LabelSettings" id="LabelSettings_p21in"]
 font = ExtResource("6_i1wtb")
-font_size = 12
-outline_size = 8
+font_size = 8
+outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
@@ -36,20 +42,49 @@ vertical_alignment = 1
 [node name="Notes" type="Node2D" parent="."]
 position = Vector2(124, 77)
 
+[node name="Taiko" type="Sprite2D" parent="."]
+position = Vector2(64, 63)
+texture = ExtResource("4_ujq87")
+centered = false
+
 [node name="Wave" type="AudioStreamPlayer" parent="."]
 
-[node name="Combo" type="Label" parent="."]
-offset_left = 81.0
-offset_top = 69.0
-offset_right = 121.0
-offset_bottom = 92.0
-text = "12"
-label_settings = SubResource("LabelSettings_838n0")
-
 [node name="Score" type="Label" parent="."]
-offset_left = 53.0
-offset_top = 33.0
-offset_right = 93.0
-offset_bottom = 56.0
-text = "12"
-label_settings = SubResource("LabelSettings_838n0")
+offset_top = 59.0
+offset_right = 54.0
+offset_bottom = 82.0
+text = "1234567890"
+label_settings = SubResource("LabelSettings_p21in")
+
+[node name="TaikoKaLeft" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(66, 64)
+texture = ExtResource("5_757hx")
+centered = false
+
+[node name="TaikoKaRight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(81, 64)
+texture = ExtResource("6_cbjxg")
+centered = false
+
+[node name="TaikoDonLeft" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(70, 68)
+texture = ExtResource("7_6iu8a")
+centered = false
+
+[node name="TaikoDonRight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(81, 68)
+texture = ExtResource("8_60vvy")
+centered = false
+
+[node name="Combo" type="Label" parent="."]
+offset_left = 60.0
+offset_top = 69.0
+offset_right = 100.0
+offset_bottom = 83.0
+text = "10000"
+label_settings = ExtResource("5_4nkvh")
+horizontal_alignment = 1

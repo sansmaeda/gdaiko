@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://csdm165pf6b4f"]
+
+[ext_resource type="FontFile" uid="uid://c4ppcb7j6tido" path="res://Themes/Default Theme/大江戸勘亭流 Std E.otf" id="1_wp8s1"]
+
+[resource]
+font = ExtResource("1_wp8s1")
+font_size = 12
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
