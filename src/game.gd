@@ -7,6 +7,7 @@ const KA: float = 0.075
 const RYOU: float = 0.025
 
 var path: String
+var genre: String
 
 var title: String
 var title_ja: String
@@ -39,6 +40,8 @@ func _init(path: String):
 func _ready():
 	_parser = TJAParser.new()
 	_parser.parse(path)
+	
+	genre = _parser.genre
 	
 	title = _parser.title
 	title_ja = _parser.title_ja

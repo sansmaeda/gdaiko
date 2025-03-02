@@ -19,8 +19,8 @@ var _score_p2: Score
 func _ready():
 	#region Init
 	add_child(game)
-	_score_p1 = Score.new(game.score_mode, game.chart_edit.score_init, game.chart_edit.score_diff)
-	_score_p2 = Score.new(game.score_mode, game.chart_edit.score_init, game.chart_edit.score_diff)
+	_score_p1 = Score.new(game.score_mode, game.chart_oni.score_init, game.chart_oni.score_diff)
+	_score_p2 = Score.new(game.score_mode, game.chart_oni.score_init, game.chart_oni.score_diff)
 	_offset = game.offset
 	_bpm = game.bpm
 	print(_bpm)
@@ -41,9 +41,9 @@ func _ready():
 	$Wave.play()
 	match course:
 		"Edit":
-			_chart = game.chart_edit
-	#print(_chart.data)
+			_chart = game.chart_oni
 	#endregion
+	
 	#Get measure (can contaim multiple lines)
 	var regex = RegEx.create_from_string(r'(?ms)^(.*?),[\n\r]*') #(?m)^([^,\r\n]*)
 	var prev_time: float = 0
@@ -71,8 +71,6 @@ func _ready():
 					pass
 				elif(line.begins_with("#END")):
 					pass
-				#elif(line.begins_with("#LYRIC")):
-					#pass
 				
 				elif(line.begins_with("#MEASURE")):
 					regex.compile(r'^#MEASURE (.*)\/(.*)$')
@@ -130,9 +128,6 @@ func _ready():
 						new_note.type = line[n]
 						new_note.speed = game.head_scroll * _scroll * 260
 						new_note.position.x = 260 * (prev_time + -_offset) * (new_note.speed / 260)
-						#pos = start + speed * time
-						#0 = start + speed * time
-						#time = start / speed
 						new_note.time = new_note.position.x / new_note.speed / 260
 						new_note.score = _score_p1
 						$Notes.add_child(new_note)
@@ -143,16 +138,29 @@ func _ready():
 					if(_balloon_active):
 						pass
 					prev_time += measure_total / note_count
+	var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
+	$Background.add_child(bg.instantiate())
+	$"Background/Vocaloid/AnimationPlayer".play("play")
+	#print("GENRE: ",game.genre)
+	#match game.genre:
+		#"Vocaloid":
+			#var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
+			#$Background.add_child(bg)
+			#$"Background/Vocaloid/Animation Player".play("play")
 func _process(delta):
 	$Combo.text = str(_score_p1.combo)
 	$Score.text = str(_score_p1.score)
 	if(Input.is_action_just_pressed("don_left")):
+		$"Taiko/Don Left".stop()
 		$"Taiko/Don Left".play("play")
 	if(Input.is_action_just_pressed("don_right")):
+		$"Taiko/Don Right".stop()
 		$"Taiko/Don Right".play("play")
 	if(Input.is_action_just_pressed("ka_left")):
+		$"Taiko/Ka Left".stop()
 		$"Taiko/Ka Left".play("play")
 	if(Input.is_action_just_pressed("ka_right")):
+		$"Taiko/Ka Right".stop()
 		$"Taiko/Ka Right".play("play")
 	#if($Wave.finished && $Notes.get_children().size() == 0):
 		#await get_tree().create_timer(1.0).timeout
