@@ -2,6 +2,8 @@ class_name Game
 extends Node
 ##Handles game logic. Themes should use this in order to get the game state.
 
+static var active_song: String
+
 const FUKA: float = 0.108
 const KA: float = 0.075
 const RYOU: float = 0.025

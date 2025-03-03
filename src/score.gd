@@ -13,15 +13,31 @@ func _init(score_mode: int, init: int, diff: int):
 	self.init = init
 	self.diff = diff
 
-func add(quality: int):
+func add(quality: int, type: String):
+	var mult: float
+	#Multiplier
+	match quality:
+		2: mult = 0
+		1: mult = 0.5
+		0: mult = 1
+	#Combo
 	match quality:
 		0,1:
 			combo += 1
 		2:
 			combo = 0
+	#Apply score
 	match score_mode:
 		1:
 			score += init + min(10, floor(combo/10.0))
 		3: 
-			score += init * int(quality==0)
-	#print("Hit ", quality, " Combo ", combo)
+			if(combo >= 100):
+				score += (init + diff * 8) * mult
+			elif(combo >= 50):
+				score += (init + diff * 4) * mult
+			elif(combo >= 30):
+				score += (init + diff * 2) * mult
+			elif(combo >= 10):
+				score += (init + diff * 1) * mult
+			else:
+				score += (init) * mult

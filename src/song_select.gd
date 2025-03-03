@@ -1,9 +1,10 @@
 extends Node
+class_name SongSelect
 
 var song_list: Array[SongData] #Populated by src/Intro/intro.gd
 
+##Gets the info of the songs in the user://Songs folder
 func load_songs() -> void:
-	#Genres
 	DirAccess.make_dir_absolute("user://Songs/")
 	for dir in DirAccess.get_directories_at("user://Songs/"):
 		if(FileAccess.file_exists("user://Songs/" + dir.path_join("box.def"))):

@@ -1,7 +1,8 @@
 extends Node
 
 var title: String
-var game: Game = Game.new("res://Songs/Test Song/TestSong.tja")
+var game: Game = Game.new(Game.active_song)
+var genre: String
 var course: String = "Edit"
 var note = load("res://Themes/Default Theme/note.tscn")
 
@@ -18,10 +19,9 @@ var _score_p2: Score
 
 var gogo: bool = false:
 	set(value):
-		if value == true:
+		if value:
 			$Track.visible = false
-		if value == false:
-			print("Flag")
+		else:
 			$Track.visible = true
 		gogo = value
 
@@ -32,7 +32,7 @@ func _ready():
 	_score_p2 = Score.new(game.score_mode, game.chart_edit.score_init, game.chart_edit.score_diff)
 	_offset = game.offset
 	_bpm = game.bpm
-	print(_bpm)
+	#Title
 	if(TranslationServer.get_locale() == "ja" && game.title_ja != ""):
 		$Title.text = game.title_ja
 	elif(TranslationServer.get_locale() == "en" && game.title_en != ""):
@@ -74,14 +74,7 @@ func _ready():
 			var line: String = a.get_string(1)
 			var buffer: RegExMatch
 			if(line.begins_with("#")):
-				#if(line.begins_with("")):
-					#pass
-				if(line.begins_with("#START")):
-					pass
-				elif(line.begins_with("#END")):
-					pass
-				
-				elif(line.begins_with("#MEASURE")):
+				if(line.begins_with("#MEASURE")):
 					regex.compile(r'^#MEASURE (.*)\/(.*)$')
 					buffer = regex.search(line)
 					_measure = buffer.get_string(1).to_float() / buffer.get_string(2).to_float()
@@ -110,14 +103,14 @@ func _ready():
 					buffer = null
 				
 				elif(line.begins_with("#GOGOSTART")):
-					var ggs = load("res://Themes/Default Theme/Game/gogo.tscn").instantiate()
+					var ggs: Node2D = load("res://Themes/Default Theme/Game/gogo.tscn").instantiate()
 					ggs.speed = game.head_scroll * _scroll * 260
 					ggs.position.x = 260 * (prev_time + -_offset) * (ggs.speed / 260)
 					ggs.value = true
 					add_child(ggs)
 				
 				elif(line.begins_with("#GOGOEND")):
-					var gge = load("res://Themes/Default Theme/Game/gogo.tscn").instantiate()
+					var gge: Node2D = load("res://Themes/Default Theme/Game/gogo.tscn").instantiate()
 					gge.speed = game.head_scroll * _scroll * 260
 					gge.position.x = 260 * (prev_time + -_offset) * (gge.speed / 260)
 					gge.value = false
@@ -159,7 +152,6 @@ func _ready():
 					prev_time += measure_total / note_count
 	var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
 	$Background.add_child(bg.instantiate())
-	#print("GENRE: ",game.genre)
 	#match game.genre:
 		#"Vocaloid":
 			#var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")

@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://kiinikos2hsu"]
+[gd_scene load_steps=3 format=3 uid="uid://kiinikos2hsu"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/main.gd" id="1_olxac"]
+[ext_resource type="Texture2D" uid="uid://cbbrgy2kuj4e4" path="res://Themes/Default Theme/Sprites/Notes/don.png" id="2_d65u4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_olxac")
+
+[node name="Don" type="Sprite2D" parent="."]
+position = Vector2(93, 70)
+texture = ExtResource("2_d65u4")

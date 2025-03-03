@@ -11,5 +11,4 @@ func _process(delta: float) -> void:
 	position.x -= speed * delta
 	if(position.x <= 0):
 		get_parent().gogo = value
-		print("GOGO ", get_parent().gogo)
 		self.queue_free()

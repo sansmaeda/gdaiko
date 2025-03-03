@@ -59,15 +59,15 @@ func _process(delta: float) -> void:
 	match_input(input) && \
 	abs(position.x) < speed * Game.RYOU:
 		queue_free()
-		score.add(0)
+		score.add(0, type)
 	elif get_parent().get_child(-1) == self && \
 	match_input(input) && \
 	abs(position.x) < speed * Game.KA:
 		queue_free()
-		score.add(1)
+		score.add(1, type)
 	elif position.x < -speed * Game.FUKA:
 		queue_free()
-		score.add(2)
+		score.add(2, type)
 func match_input(input: String) -> bool:
 	match input:
 		"don":
