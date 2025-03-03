@@ -1,7 +1,7 @@
 extends Node
 
 var title: String
-var game: Game = Game.new("res://Songs/Test Song/TestSong.tja")
+var game: Game = Game.new("/home/sans/builds/ese/ESE/03 Vocaloid/Miku Miku ni Shite Ageru♪ [Shite Yan yo]/Miku Miku ni Shite Ageru [Shite Yan yo].tja")
 var course: String = "Edit"
 var note = load("res://Themes/Default Theme/note.tscn")
 
@@ -140,7 +140,6 @@ func _ready():
 					prev_time += measure_total / note_count
 	var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
 	$Background.add_child(bg.instantiate())
-	$"Background/Vocaloid/AnimationPlayer".play("play")
 	#print("GENRE: ",game.genre)
 	#match game.genre:
 		#"Vocaloid":

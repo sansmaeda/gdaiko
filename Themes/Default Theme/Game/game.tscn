@@ -80,6 +80,33 @@ _data = {
 "play": SubResource("Animation_ekprw")
 }
 
+[sub_resource type="Animation" id="Animation_23enb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Don Right Image:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Don Right Image:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_p5moj"]
 resource_name = "play"
 length = 0.1667
@@ -109,12 +136,19 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_23enb"]
-length = 0.001
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5mns"]
+_data = {
+"RESET": SubResource("Animation_23enb"),
+"play": SubResource("Animation_p5moj")
+}
+
+[sub_resource type="Animation" id="Animation_qvv5q"]
+resource_name = "RESET"
+step = 0.0833
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Don Right Image:visible")
+tracks/0/path = NodePath("Taiko/Ka Left Image:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -126,7 +160,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Don Right Image:self_modulate")
+tracks/1/path = NodePath("Taiko/Ka Left Image:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -134,12 +168,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5mns"]
-_data = {
-"RESET": SubResource("Animation_23enb"),
-"play": SubResource("Animation_p5moj")
 }
 
 [sub_resource type="Animation" id="Animation_3i5p5"]
@@ -171,13 +199,18 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_qvv5q"]
-resource_name = "RESET"
-step = 0.0833
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_en6kh"]
+_data = {
+"RESET": SubResource("Animation_qvv5q"),
+"play": SubResource("Animation_3i5p5")
+}
+
+[sub_resource type="Animation" id="Animation_5ywas"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Taiko/Ka Left Image:visible")
+tracks/0/path = NodePath("Ka Right Image:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -185,24 +218,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Taiko/Ka Left Image:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_en6kh"]
-_data = {
-"RESET": SubResource("Animation_qvv5q"),
-"play": SubResource("Animation_3i5p5")
 }
 
 [sub_resource type="Animation" id="Animation_a8e2r"]
@@ -220,21 +235,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_5ywas"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Ka Right Image:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ldg8i"]

@@ -63,10 +63,6 @@ func _ready():
 	score_mode = _parser.score_mode
 	head_scroll = _parser.head_scroll
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 ##Class containing data used by an individual chart
 class Chart:
 	
