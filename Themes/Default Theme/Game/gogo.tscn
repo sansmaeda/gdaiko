@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1me2ysbh3w01"]
+
+[ext_resource type="Script" path="res://Themes/Default Theme/Game/gogo.gd" id="1_jy7sr"]
+
+[node name="Gogo" type="Node2D"]
+script = ExtResource("1_jy7sr")

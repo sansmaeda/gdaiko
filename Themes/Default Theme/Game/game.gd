@@ -1,7 +1,7 @@
 extends Node
 
 var title: String
-var game: Game = Game.new("/home/sans/builds/ese/ESE/03 Vocaloid/Miku Miku ni Shite Ageru♪ [Shite Yan yo]/Miku Miku ni Shite Ageru [Shite Yan yo].tja")
+var game: Game = Game.new("res://Songs/Test Song/TestSong.tja")
 var course: String = "Edit"
 var note = load("res://Themes/Default Theme/note.tscn")
 
@@ -16,11 +16,20 @@ var _roll_active: bool = false
 var _score_p1: Score
 var _score_p2: Score
 
+var gogo: bool = false:
+	set(value):
+		if value == true:
+			$Track.visible = false
+		if value == false:
+			print("Flag")
+			$Track.visible = true
+		gogo = value
+
 func _ready():
 	#region Init
 	add_child(game)
-	_score_p1 = Score.new(game.score_mode, game.chart_oni.score_init, game.chart_oni.score_diff)
-	_score_p2 = Score.new(game.score_mode, game.chart_oni.score_init, game.chart_oni.score_diff)
+	_score_p1 = Score.new(game.score_mode, game.chart_edit.score_init, game.chart_edit.score_diff)
+	_score_p2 = Score.new(game.score_mode, game.chart_edit.score_init, game.chart_edit.score_diff)
 	_offset = game.offset
 	_bpm = game.bpm
 	print(_bpm)
@@ -41,7 +50,7 @@ func _ready():
 	$Wave.play()
 	match course:
 		"Edit":
-			_chart = game.chart_oni
+			_chart = game.chart_edit
 	#endregion
 	
 	#Get measure (can contaim multiple lines)
@@ -101,9 +110,19 @@ func _ready():
 					buffer = null
 				
 				elif(line.begins_with("#GOGOSTART")):
-					pass
+					var ggs = load("res://Themes/Default Theme/Game/gogo.tscn").instantiate()
+					ggs.speed = game.head_scroll * _scroll * 260
+					ggs.position.x = 260 * (prev_time + -_offset) * (ggs.speed / 260)
+					ggs.value = true
+					add_child(ggs)
+				
 				elif(line.begins_with("#GOGOEND")):
-					pass
+					var gge = load("res://Themes/Default Theme/Game/gogo.tscn").instantiate()
+					gge.speed = game.head_scroll * _scroll * 260
+					gge.position.x = 260 * (prev_time + -_offset) * (gge.speed / 260)
+					gge.value = false
+					add_child(gge)
+				
 				elif(line.begins_with("#BARLINEOFF")):
 					pass
 				elif(line.begins_with("#BARLINEON")):
