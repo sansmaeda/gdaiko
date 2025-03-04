@@ -23,9 +23,8 @@ func _process(_delta):
 		if(selected_genre > genres.size()-1): selected_genre = 0
 		$"Header 4 (Selected)/Label".text = get_genre_text(genres[selected_genre])
 		if Input.is_action_just_pressed("don_right"): focused = true
-	if focused:
+	elif focused:
 		var song_list: Array[String] = get_songs(genres[selected_genre])
-		print(song_list)
 		if(Input.is_action_just_pressed("ka_left")):
 			selected_song -= 1
 		if(Input.is_action_just_pressed("ka_right")):
@@ -35,6 +34,8 @@ func _process(_delta):
 		var parser: TJAParser = TJAParser.new()
 		parser.parse(song_list[selected_song])
 		$"Header 4 (Selected)/Label".text = parser.title
+		if(Input.is_action_just_pressed("don_right")):
+			load_game(song_list[selected_song])
 
 func get_songs(path: String) -> Array[String]:
 	var rtn: Array[String]
@@ -47,3 +48,9 @@ func get_songs(path: String) -> Array[String]:
 func get_genre_text(path: String):
 	var regex = RegEx.create_from_string("(?m)#GENRE:(.*)$")
 	return regex.search(FileAccess.get_file_as_string(path.path_join("box.def"))).get_string(1)
+
+func load_game(path: String) -> void:
+	var game: Node2D = load("res://Themes/Default Theme/Game/game.tscn").instantiate()
+	BackgroundData.active_song = path
+	get_parent().add_child(game)
+	self.queue_free()
