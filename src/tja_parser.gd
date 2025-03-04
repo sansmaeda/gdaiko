@@ -42,8 +42,8 @@ var se_vol: float = 100
 ##Replaces gauge if other than 0. Number of misses before failing the song.
 var life: int = 0
 
-##Genre of the song. Determines which folder the song appears in.
-var genre: String
+
+
 ##Chart creator
 var maker: String
 var side: String = "Normal" #Normal/1, EX/2, Both/3
@@ -180,14 +180,6 @@ func parse(path: String):
 	buffer = regex.search(text)
 	if(buffer):
 		demo_start = buffer.get_string(1).strip_escapes().to_float()
-		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
-	buffer = null
-	
-	#Genre
-	regex.compile(r'(?m)^GENRE:(.*)$')
-	buffer = regex.search(text)
-	if(buffer):
-		genre = buffer.get_string(1).strip_escapes()
 		text = text.erase(buffer.get_start(), buffer.get_string().length()+1)
 	buffer = null
 	

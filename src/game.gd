@@ -1,6 +1,6 @@
 class_name Game
-extends Node
-##Handles game logic. Themes should use this in order to get the game state.
+extends TJAParser
+##Contains data to be used during the gameplay section. Themes should use this in order to get information about the song.
 
 static var active_song: String
 
@@ -9,61 +9,14 @@ const KA: float = 0.075
 const RYOU: float = 0.025
 
 var path: String
+##Genre of the song. Determines which folder the song appears in.
 var genre: String
 
-var title: String
-var title_ja: String
-var title_en: String
-var subtitle: String
-var subtitle_ja: String
-var subtitle_en: String
-
-var _parser: TJAParser
-
-var chart_easy: Chart
-var chart_normal: Chart
-var chart_hard: Chart
-var chart_oni: Chart
-var chart_edit: Chart
-
-var wave: String
-var offset: float
-var bpm: float
-var head_scroll: float = 1
 var data: String
-
-var score_mode: int
-
 
 func _init(path: String):
 	self.path = path
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	_parser = TJAParser.new()
-	_parser.parse(path)
-	
-	genre = _parser.genre
-	
-	title = _parser.title
-	title_ja = _parser.title_ja
-	title_en = _parser.title_en
-	subtitle = _parser.subtitle
-	subtitle_ja = _parser.subtitle_ja
-	subtitle_en = _parser.subtitle_en
-	
-	chart_easy = _parser.chart_easy
-	chart_normal = _parser.chart_normal
-	chart_hard = _parser.chart_hard
-	chart_oni = _parser.chart_oni
-	chart_edit = _parser.chart_edit
-	
-	wave = _parser.wave
-	offset = _parser.offset
-	bpm = _parser.bpm
-	
-	score_mode = _parser.score_mode
-	head_scroll = _parser.head_scroll
+	parse(path)
 
 ##Class containing data used by an individual chart
 class Chart:

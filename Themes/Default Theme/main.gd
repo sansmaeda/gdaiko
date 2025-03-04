@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if(Input.is_action_just_pressed("don_right")):
-		load_game("res://Songs/Test Song/TestSong.tja")
+		load_game("user://Songs/03 Vocaloid/Kagerou Daze/Kagerou Daze.tja")
 
 func load_game(path: String) -> void:
 	Game.active_song = path

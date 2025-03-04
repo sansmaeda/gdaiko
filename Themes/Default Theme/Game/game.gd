@@ -4,7 +4,10 @@ var title: String
 var game: Game = Game.new(Game.active_song)
 var genre: String
 var course: String = "Edit"
-var note = load("res://Themes/Default Theme/note.tscn")
+var note = load("res://Themes/Default Theme/Game/note.tscn")
+var gg_res = load("res://Themes/Default Theme/Game/gogo.tscn")
+
+var song_number: int
 
 var _offset: float
 var _bpm: float
@@ -27,9 +30,8 @@ var gogo: bool = false:
 
 func _ready():
 	#region Init
-	add_child(game)
-	_score_p1 = Score.new(game.score_mode, game.chart_edit.score_init, game.chart_edit.score_diff)
-	_score_p2 = Score.new(game.score_mode, game.chart_edit.score_init, game.chart_edit.score_diff)
+	_score_p1 = Score.new(game.score_mode, game.chart_oni.score_init, game.chart_oni.score_diff)
+	_score_p2 = Score.new(game.score_mode, game.chart_oni.score_init, game.chart_oni.score_diff)
 	_offset = game.offset
 	_bpm = game.bpm
 	#Title
@@ -50,7 +52,7 @@ func _ready():
 	$Wave.play()
 	match course:
 		"Edit":
-			_chart = game.chart_edit
+			_chart = game.chart_oni
 	#endregion
 	
 	#Get measure (can contaim multiple lines)
@@ -103,15 +105,15 @@ func _ready():
 					buffer = null
 				
 				elif(line.begins_with("#GOGOSTART")):
-					var ggs: Node2D = load("res://Themes/Default Theme/Game/gogo.tscn").instantiate()
-					ggs.speed = game.head_scroll * _scroll * 260
+					var ggs: Node2D = gg_res.instantiate()
+					ggs.speed = game.head_scroll * _scroll * 130
 					ggs.position.x = 260 * (prev_time + -_offset) * (ggs.speed / 260)
 					ggs.value = true
 					add_child(ggs)
 				
 				elif(line.begins_with("#GOGOEND")):
-					var gge: Node2D = load("res://Themes/Default Theme/Game/gogo.tscn").instantiate()
-					gge.speed = game.head_scroll * _scroll * 260
+					var gge: Node2D = gg_res.instantiate()
+					gge.speed = game.head_scroll * _scroll * 130
 					gge.position.x = 260 * (prev_time + -_offset) * (gge.speed / 260)
 					gge.value = false
 					add_child(gge)
@@ -138,7 +140,7 @@ func _ready():
 					if(line[n] != "0" && line[n] != "8"):
 						var new_note: Note = note.instantiate()
 						new_note.type = line[n]
-						new_note.speed = game.head_scroll * _scroll * 260
+						new_note.speed = game.head_scroll * _scroll * 130
 						new_note.position.x = 260 * (prev_time + -_offset) * (new_note.speed / 260)
 						new_note.time = new_note.position.x / new_note.speed / 260
 						new_note.score = _score_p1
@@ -158,7 +160,11 @@ func _ready():
 			#$Background.add_child(bg)
 			#$"Background/Vocaloid/Animation Player".play("play")
 func _process(delta):
-	$Combo.text = str(_score_p1.combo)
+	if(_score_p1.combo >= 5):
+		$Combo.visible = true
+		$Combo.text = str(_score_p1.combo)
+	else:
+		$Combo.visible = false
 	$Score.text = str(_score_p1.score)
 	if(Input.is_action_just_pressed("don_left")):
 		$"Taiko/Don Left".stop()
