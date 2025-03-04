@@ -17,6 +17,10 @@ run/max_fps=120
 boot_splash/show_image=false
 config/icon="res://Themes/Default Theme/Sprites/Notes/don2.png"
 
+[autoload]
+
+BackgroundData="*res://src/background_data.gd"
+
 [display]
 
 window/size/viewport_width=1920

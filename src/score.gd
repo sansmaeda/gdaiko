@@ -26,4 +26,4 @@ func add(quality: int, type: String):
 			combo += 1
 		2:
 			combo = 0
-	score += 1000000 / total_notes * mult
+	score += 1000000 / float(total_notes) * mult

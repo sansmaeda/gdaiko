@@ -2,8 +2,6 @@ class_name Game
 extends TJAParser
 ##Contains data to be used during the gameplay section. Themes should use this in order to get information about the song.
 
-static var active_song: String
-
 const FUKA: float = 0.108
 const KA: float = 0.075
 const RYOU: float = 0.025

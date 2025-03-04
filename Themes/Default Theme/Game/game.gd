@@ -1,14 +1,11 @@
 extends Node
 
-var title: String
-var game: Game = Game.new(Game.active_song)
-var genre: String
+var game: Game
 var course: String = "Edit"
 var note = load("res://Themes/Default Theme/Game/note.tscn")
 var gg_res = load("res://Themes/Default Theme/Game/gogo.tscn")
 
-var song_number: int
-
+#These values can be changed by commands.
 var _offset: float
 var _bpm: float
 var _chart: Game.Chart
@@ -30,6 +27,7 @@ var gogo: bool = false:
 
 func _ready():
 	#region Init
+	game = Game.new(BackgroundData.active_song)
 	_offset = game.offset
 	_bpm = game.bpm
 	#Title
@@ -50,7 +48,7 @@ func _ready():
 	$Wave.play()
 	match course:
 		"Edit":
-			_chart = game.chart_oni
+			_chart = game.chart_edit
 	#endregion
 	
 	#Get measure (can contaim multiple lines)
@@ -158,7 +156,7 @@ func _ready():
 			#$Background.add_child(bg)
 			#$"Background/Vocaloid/Animation Player".play("play")
 	_score_p1 = Score.new($Notes.get_child_count())
-func _process(delta):
+func _process(_delta):
 	if(_score_p1.combo >= 5):
 		$Combo.visible = true
 		$Combo.text = str(_score_p1.combo)

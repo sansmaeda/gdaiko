@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://l8ist8p1dved"]
+[gd_scene load_steps=4 format=3 uid="uid://l8ist8p1dved"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/Song Select/song_select.gd" id="1_8ihgu"]
+[ext_resource type="FontFile" uid="uid://c4ppcb7j6tido" path="res://Themes/Default Theme/大江戸勘亭流 Std E.otf" id="2_0i5eq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ymj8m"]
+font = ExtResource("2_0i5eq")
+font_size = 11
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="SongSelect" type="Node2D"]
 script = ExtResource("1_8ihgu")
+
+[node name="Header 4 (Selected)" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Header 4 (Selected)"]
+
+[node name="Label" type="Label" parent="Header 4 (Selected)"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Active"
+label_settings = SubResource("LabelSettings_ymj8m")

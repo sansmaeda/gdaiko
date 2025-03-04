@@ -72,7 +72,6 @@ func match_input(input: String) -> bool:
 	match input:
 		"don":
 			return Input.is_action_just_pressed("don_left") || Input.is_action_just_pressed("don_right")
-			print("flag")
 		"ka":
 			return Input.is_action_just_pressed("ka_left") || Input.is_action_just_pressed("ka_right")
 		"either":
