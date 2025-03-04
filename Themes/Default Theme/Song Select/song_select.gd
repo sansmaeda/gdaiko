@@ -14,6 +14,5 @@ func _ready():
 		var regex = RegEx.create_from_string("(?m)#GENRE:(.*)$")
 		print(regex.search(FileAccess.get_file_as_string(genre)).get_string(1))
 
-
 func get_songs(folder: String):
 	pass

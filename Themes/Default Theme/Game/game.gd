@@ -30,8 +30,6 @@ var gogo: bool = false:
 
 func _ready():
 	#region Init
-	_score_p1 = Score.new(game.score_mode, game.chart_oni.score_init, game.chart_oni.score_diff)
-	_score_p2 = Score.new(game.score_mode, game.chart_oni.score_init, game.chart_oni.score_diff)
 	_offset = game.offset
 	_bpm = game.bpm
 	#Title
@@ -159,6 +157,7 @@ func _ready():
 			#var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
 			#$Background.add_child(bg)
 			#$"Background/Vocaloid/Animation Player".play("play")
+	_score_p1 = Score.new($Notes.get_child_count())
 func _process(delta):
 	if(_score_p1.combo >= 5):
 		$Combo.visible = true
