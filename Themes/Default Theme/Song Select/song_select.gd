@@ -30,17 +30,19 @@ func _process(_delta):
 	if !focused:
 		if(Input.is_action_just_pressed("p1_ka_left")):
 			selected_genre -= 1
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("move_backward")
 		if(Input.is_action_just_pressed("p1_ka_right")):
 			selected_genre += 1
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play("move_forward")
-		$"Header 0/Label".text = genres[selected_genre].title
-		if(selected_genre-1 < 0):
-			$"Header -1/Label".text = genres[genres.size()-1].title
-		elif(selected_genre-1 > genres.size()-1):
-			$"Header -1/Label".text = genres[0].title
-		else:
-			$"Header -1/Label".text = genres[selected_genre-1].title
+		$"Headers/Header -3/Label".text = genres[selected_genre-3 % genres.size()].title
+		$"Headers/Header -2/Label".text = genres[selected_genre-2 % genres.size()].title
+		$"Headers/Header -1/Label".text = genres[selected_genre-1 % genres.size()].title
+		$"Headers/Header 0/Label".text = genres[selected_genre].title
+		$"Headers/Header 1/Label".text = genres[selected_genre+0 % genres.size()-1].title
+		$"Headers/Header 2/Label".text = genres[selected_genre+1 % genres.size()-1].title
+		$"Headers/Header 3/Label".text = genres[selected_genre+2 % genres.size()-1].title
 		if Input.is_action_just_pressed("p1_don_right"): focused = true
 	else:
 		song_list = get_songs(genres[selected_genre].path)
@@ -48,8 +50,16 @@ func _process(_delta):
 			selected_song -= 1
 		if(Input.is_action_just_pressed("p1_ka_right")):
 			selected_song += 1
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("move_forward")
 		
 		$"Header 0/Label".text = song_list[selected_song].title
+		if(selected_song-1 < 0):
+			$"Header -1/Label".text = genres[genres.size()-1].title
+		elif(selected_song-1 > song_list.size()-1):
+			$"Header -1/Label".text = genres[0].title
+		else:
+			$"Header -1/Label".text = song_list[selected_song-1].title
 		if(Input.is_action_just_pressed("p1_don_right")):
 			load_game(song_list[selected_song].path)
 
