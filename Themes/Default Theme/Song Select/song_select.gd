@@ -28,21 +28,29 @@ func _ready():
 
 func _process(_delta):
 	if !focused:
-		if(Input.is_action_just_pressed("ka_left")):
+		if(Input.is_action_just_pressed("p1_ka_left")):
 			selected_genre -= 1
-		if(Input.is_action_just_pressed("ka_right")):
+		if(Input.is_action_just_pressed("p1_ka_right")):
 			selected_genre += 1
-		$"Header 4 (Selected)/Label".text = genres[selected_genre].title
-		if Input.is_action_just_pressed("don_right"): focused = true
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("move_forward")
+		$"Header 0/Label".text = genres[selected_genre].title
+		if(selected_genre-1 < 0):
+			$"Header -1/Label".text = genres[genres.size()-1].title
+		elif(selected_genre-1 > genres.size()-1):
+			$"Header -1/Label".text = genres[0].title
+		else:
+			$"Header -1/Label".text = genres[selected_genre-1].title
+		if Input.is_action_just_pressed("p1_don_right"): focused = true
 	else:
 		song_list = get_songs(genres[selected_genre].path)
-		if(Input.is_action_just_pressed("ka_left")):
+		if(Input.is_action_just_pressed("p1_ka_left")):
 			selected_song -= 1
-		if(Input.is_action_just_pressed("ka_right")):
+		if(Input.is_action_just_pressed("p1_ka_right")):
 			selected_song += 1
 		
-		$"Header 4 (Selected)/Label".text = song_list[selected_song].title
-		if(Input.is_action_just_pressed("don_right")):
+		$"Header 0/Label".text = song_list[selected_song].title
+		if(Input.is_action_just_pressed("p1_don_right")):
 			load_game(song_list[selected_song].path)
 
 func get_songs(path: String) -> Array[Song]:
@@ -54,7 +62,6 @@ func get_songs(path: String) -> Array[Song]:
 				new_song.path = path.path_join(folder).path_join(file)
 				var parser: TJAParser = TJAParser.new()
 				parser.parse(new_song.path)
-				print(parser.title)
 				new_song.title = parser.title
 				rtn.append(new_song)
 	return rtn

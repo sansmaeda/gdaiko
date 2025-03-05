@@ -48,7 +48,7 @@ func _ready():
 	$Wave.play()
 	match course:
 		"Edit":
-			_chart = game.chart_oni
+			_chart = game.chart_edit
 	#endregion
 	
 	#Get measure (can contaim multiple lines)

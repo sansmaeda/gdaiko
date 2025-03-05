@@ -1,7 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://l8ist8p1dved"]
+[gd_scene load_steps=7 format=3 uid="uid://l8ist8p1dved"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/Song Select/song_select.gd" id="1_8ihgu"]
 [ext_resource type="FontFile" uid="uid://c4ppcb7j6tido" path="res://Themes/Default Theme/大江戸勘亭流 Std E.otf" id="2_0i5eq"]
+
+[sub_resource type="Animation" id="Animation_teqnr"]
+resource_name = "move_forward"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Header 0:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(109, 146), Vector2(99, 95)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Header -1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(99, 95), Vector2(89, 44)]
+}
+
+[sub_resource type="Animation" id="Animation_8p2xe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Header 0:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(99, 95)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Header -1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(89, 44)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_241ct"]
+_data = {
+"RESET": SubResource("Animation_8p2xe"),
+"move_forward": SubResource("Animation_teqnr")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_ymj8m"]
 font = ExtResource("2_0i5eq")
@@ -12,11 +74,38 @@ outline_color = Color(0, 0, 0, 1)
 [node name="SongSelect" type="Node2D"]
 script = ExtResource("1_8ihgu")
 
-[node name="Header 4 (Selected)" type="Node" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_241ct")
+}
 
-[node name="Sprite2D" type="Sprite2D" parent="Header 4 (Selected)"]
+[node name="Header -1" type="Node2D" parent="."]
+position = Vector2(89, 44)
 
-[node name="Label" type="Label" parent="Header 4 (Selected)"]
+[node name="Sprite2D" type="Sprite2D" parent="Header -1"]
+position = Vector2(186, 26)
+
+[node name="Panel" type="Panel" parent="Header -1"]
+offset_right = 186.0
+offset_bottom = 26.0
+
+[node name="Label" type="Label" parent="Header -1"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Active"
+label_settings = SubResource("LabelSettings_ymj8m")
+
+[node name="Header 0" type="Node2D" parent="."]
+position = Vector2(99, 95)
+
+[node name="Sprite2D" type="Sprite2D" parent="Header 0"]
+position = Vector2(186, 26)
+
+[node name="Panel" type="Panel" parent="Header 0"]
+offset_right = 186.0
+offset_bottom = 26.0
+
+[node name="Label" type="Label" parent="Header 0"]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Active"

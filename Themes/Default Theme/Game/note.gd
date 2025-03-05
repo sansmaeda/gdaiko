@@ -71,9 +71,9 @@ func _process(delta: float) -> void:
 func match_input(input: String) -> bool:
 	match input:
 		"don":
-			return Input.is_action_just_pressed("don_left") || Input.is_action_just_pressed("don_right")
+			return Input.is_action_just_pressed("p1_don_left") || Input.is_action_just_pressed("p1_don_right")
 		"ka":
-			return Input.is_action_just_pressed("ka_left") || Input.is_action_just_pressed("ka_right")
+			return Input.is_action_just_pressed("p1_ka_left") || Input.is_action_just_pressed("p1_ka_right")
 		"either":
 			return match_input("don") || match_input("ka")
 		_:

@@ -7,5 +7,5 @@ func _ready() -> void:
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 func _process(delta: float) -> void:
-	if(Input.is_action_just_pressed("don_right")):
+	if(Input.is_action_just_pressed("p1_don_right")):
 		get_tree().change_scene_to_file("res://Themes/Default Theme/Song Select/song_select.tscn")
