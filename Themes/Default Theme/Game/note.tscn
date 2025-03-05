@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://coby8xd5h080q"]
+[gd_scene load_steps=3 format=3 uid="uid://bwehasas41kh4"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/Game/note.gd" id="1_usxd4"]
 [ext_resource type="Texture2D" uid="uid://cbbrgy2kuj4e4" path="res://Themes/Default Theme/Sprites/Notes/don.png" id="2_de5r0"]

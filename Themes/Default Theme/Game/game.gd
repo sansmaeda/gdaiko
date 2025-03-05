@@ -48,7 +48,7 @@ func _ready():
 	$Wave.play()
 	match course:
 		"Edit":
-			_chart = game.chart_edit
+			_chart = game.chart_oni
 	#endregion
 	
 	#Get measure (can contaim multiple lines)
@@ -68,7 +68,6 @@ func _ready():
 			if(!line.begins_with("#")):
 				note_count += line.length()
 		for a: RegExMatch in b:
-			print("|",a.get_string(), "|\n")
 			var line: String = a.get_string(1)
 			var buffer: RegExMatch
 			if(line.begins_with("#")):
