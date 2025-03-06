@@ -2,8 +2,15 @@ extends Node2D
 class_name SongSelect
 
 var genres: Array[Genre]
-var selected_genre: int = 0
-var selected_song: int = 0
+var selected_genre: int = 0:
+	get:
+		return selected_genre % genres.size()
+var selected_song: int = 0:
+	get:
+		if focused:
+			return selected_song % (song_list.size()+1+ceil(selected_song/_close_freq))
+		else:
+			return selected_song
 #Represents whether the menu is in genre or song selector
 var focused: bool = false
 var song_list: Array[Song]
@@ -20,72 +27,88 @@ func _ready():
 			new_genre.title = get_genre_text(path)
 			genres.append(new_genre)
 
-func _process(_delta):
+func _input(event):
 	if !focused:
-		if(Input.is_action_just_pressed("p1_ka_left")):
+		if event.is_action_pressed("p1_ka_left"):
 			selected_genre -= 1
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play("move_backward")
-		if(Input.is_action_just_pressed("p1_ka_right")):
-			selected_genre += 1
-			$AnimationPlayer.stop()
-			$AnimationPlayer.play("move_forward")
+		if(event.is_action_pressed("p1_ka_right")):
+				selected_genre += 1
+				$AnimationPlayer.stop()
+				$AnimationPlayer.play("move_forward")
 		for h in $Headers.get_children():
 			set_genre_data(h)
-			
-		if Input.is_action_just_pressed("p1_don_right"): focused = true
+		if event.is_action_pressed("p1_don_right"): focused = true
 	else: #focused
-		song_list = get_songs(genres[selected_genre].path)
-		if(Input.is_action_just_pressed("p1_ka_left")):
+		song_list = get_songs(genres[selected_genre%genres.size()].path)
+		if(event.is_action_pressed("p1_ka_left")):
 			selected_song -= 1
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play("move_backward")
-		if(Input.is_action_just_pressed("p1_ka_right")):
+		if(event.is_action_pressed("p1_ka_right")):
 			selected_song += 1
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play("move_forward")
-		
-		$"Headers/Header -3/Label".text = genres[(selected_genre-3) % genres.size()-1].title
-		$"Headers/Header -2/Label".text = genres[(selected_genre-2) % genres.size()-1].title
-		$"Headers/Header -1/Label".text = genres[(selected_genre-1) % genres.size()-1].title
-		$"Headers/Header 0/Label".text = genres[(selected_genre)% genres.size()-1].title
-		$"Headers/Header 1/Label".text = genres[(selected_genre+1) % genres.size()-1].title
-		$"Headers/Header 2/Label".text = genres[(selected_genre+2) % genres.size()-1].title
-		$"Headers/Header 3/Label".text = genres[(selected_genre+3) % genres.size()-1].title
-		if(Input.is_action_just_pressed("p1_don_right")):
-			load_game(song_list[selected_song].path)
+		for h in $Headers.get_children():
+			set_song_data(h)
+		if(event.is_action_pressed("p1_don_right")):
+			if selected_song < 0 || selected_song > song_list.size():
+				selected_genre += selected_song
+				selected_genre = selected_genre % genres.size()
+				selected_song = 0
+			elif(selected_song % _close_freq == 0):
+				selected_song = 0
+				focused = false
+			else:
+				load_game(song_list[selected_song-ceil(selected_song/_close_freq)-1].path)
+
+func _process(_delta):
+	pass
+
+func get_color_data(genre: String) -> Array[Color]:
+	match genre:
+			"J-POP":
+				return [Color("42c0d3"), Color("aae3ea")]
+			"アニメ":
+				return [Color("ff90d2"), Color("ffcdeb")]
+			"ボーカロイド", "VOCALOID":
+				return [Color("cccfde"), Color("e7e8f3")]
+			"どうよう":
+				return [Color("fec000"), Color("ffe38d")]
+			"バラエティ", "バラエティー":
+				return [Color("1ec83b"), Color("9ae6a7")]
+			"クラシック":
+				return [Color("cac101"), Color("e6e38b")]
+			"ゲームミュージック":
+				return [Color("cb89e8"), Color("e8cbf6")]
+			"ナムコオリジナル":
+				return [Color("ff7028"), Color("ffc09e")]
+			_:
+				return [Color("ffffff"), Color("ffffff")]
 
 func set_genre_data(header: Node2D) -> void:
-	var title = genres[(selected_genre+header.get_index()-3) % (genres.size()-1)].title.strip_edges()
+	var title = genres[(selected_genre+header.get_index()-3+selected_song) % genres.size()].title.strip_edges()
+	header.get_child(0).self_modulate = get_color_data(title)[0]
+	header.get_child(1).self_modulate = get_color_data(title)[1]
 	header.get_child(2).text = title
-	match title:
-			"J-POP":
-				header.get_child(0).self_modulate = Color("42c0d3")	
-				header.get_child(1).self_modulate = Color("aae3ea")
-			"アニメ":
-				header.get_child(0).self_modulate = Color("ff90d2")
-				header.get_child(1).self_modulate = Color("ffcdeb")
-			"ボーカロイド", "VOCALOID":
-				header.get_child(0).self_modulate = Color("cccfde")
-				header.get_child(1).self_modulate = Color("e7e8f3")
-			"どうよう":
-				header.get_child(0).self_modulate = Color("fec000")
-				header.get_child(1).self_modulate = Color("ffe38d")
-			"バラエティ", "バラエティー":
-				header.get_child(0).self_modulate = Color("1ec83b")
-				header.get_child(1).self_modulate = Color("9ae6a7")
-			"クラシック":
-				header.get_child(0).self_modulate = Color("cac101")
-				header.get_child(1).self_modulate = Color("e6e38b")
-			"ゲームミュージック":
-				header.get_child(0).self_modulate = Color("cb89e8")
-				header.get_child(1).self_modulate = Color("e8cbf6")
-			"ナムコオリジナル":
-				header.get_child(0).self_modulate = Color("ff7028")
-				header.get_child(1).self_modulate = Color("ffc09e")
-			_:
-				header.get_child(0).self_modulate = Color("ffffff")
-				header.get_child(1).self_modulate = Color("ffffff")
+
+func set_song_data(header: Node2D) -> void:
+	var type: String
+	var offset = header.get_index()-3
+	var cancel_count: int = ceil(selected_song/_close_freq)
+	if selected_song+offset < 0 || selected_song+offset-ceil(selected_song/_close_freq) > song_list.size():
+		set_genre_data(header)
+	elif (selected_song+offset) % _close_freq == 0:
+		header.get_child(2).text = "Close"
+		header.get_child(0).self_modulate = Color("000000")
+	else:
+		var parser = TJAParser.new()
+		print(selected_song+offset-ceil(selected_song/_close_freq))
+		parser.parse(song_list[selected_song+offset-ceil(selected_song/_close_freq)-1].path)
+		header.get_child(2).text = parser.title
+		header.get_child(0).self_modulate = get_color_data(genres[selected_genre].title.strip_edges())[0]
+		header.get_child(1).self_modulate = get_color_data(genres[selected_genre].title.strip_edges())[1]
 
 func get_songs(path: String) -> Array[Song]:
 	var rtn: Array[Song]
