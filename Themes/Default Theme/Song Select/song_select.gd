@@ -2,19 +2,13 @@ extends Node2D
 class_name SongSelect
 
 var genres: Array[Genre]
-var selected_genre: int = 0:
-	set(value):
-		if(value < 0): selected_genre = genres.size()-1
-		elif(value > genres.size()-1): selected_genre = 0
-		else: selected_genre = value
-var selected_song: int = 0:
-	set(value):
-		if(value < 0): selected_song = song_list.size()-1
-		elif(value > song_list.size()-1): selected_song = 0
-		else: selected_song = value
+var selected_genre: int = 0
+var selected_song: int = 0
 #Represents whether the menu is in genre or song selector
 var focused: bool = false
 var song_list: Array[Song]
+
+var _close_freq: int = 7
 
 func _ready():
 	var folders = DirAccess.get_directories_at("user://Songs/")
@@ -36,32 +30,62 @@ func _process(_delta):
 			selected_genre += 1
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play("move_forward")
-		$"Headers/Header -3/Label".text = genres[selected_genre-3 % genres.size()].title
-		$"Headers/Header -2/Label".text = genres[selected_genre-2 % genres.size()].title
-		$"Headers/Header -1/Label".text = genres[selected_genre-1 % genres.size()].title
-		$"Headers/Header 0/Label".text = genres[selected_genre].title
-		$"Headers/Header 1/Label".text = genres[selected_genre+0 % genres.size()-1].title
-		$"Headers/Header 2/Label".text = genres[selected_genre+1 % genres.size()-1].title
-		$"Headers/Header 3/Label".text = genres[selected_genre+2 % genres.size()-1].title
+		for h in $Headers.get_children():
+			set_genre_data(h)
+			
 		if Input.is_action_just_pressed("p1_don_right"): focused = true
-	else:
+	else: #focused
 		song_list = get_songs(genres[selected_genre].path)
 		if(Input.is_action_just_pressed("p1_ka_left")):
 			selected_song -= 1
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("move_backward")
 		if(Input.is_action_just_pressed("p1_ka_right")):
 			selected_song += 1
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play("move_forward")
 		
-		$"Header 0/Label".text = song_list[selected_song].title
-		if(selected_song-1 < 0):
-			$"Header -1/Label".text = genres[genres.size()-1].title
-		elif(selected_song-1 > song_list.size()-1):
-			$"Header -1/Label".text = genres[0].title
-		else:
-			$"Header -1/Label".text = song_list[selected_song-1].title
+		$"Headers/Header -3/Label".text = genres[(selected_genre-3) % genres.size()-1].title
+		$"Headers/Header -2/Label".text = genres[(selected_genre-2) % genres.size()-1].title
+		$"Headers/Header -1/Label".text = genres[(selected_genre-1) % genres.size()-1].title
+		$"Headers/Header 0/Label".text = genres[(selected_genre)% genres.size()-1].title
+		$"Headers/Header 1/Label".text = genres[(selected_genre+1) % genres.size()-1].title
+		$"Headers/Header 2/Label".text = genres[(selected_genre+2) % genres.size()-1].title
+		$"Headers/Header 3/Label".text = genres[(selected_genre+3) % genres.size()-1].title
 		if(Input.is_action_just_pressed("p1_don_right")):
 			load_game(song_list[selected_song].path)
+
+func set_genre_data(header: Node2D) -> void:
+	var title = genres[(selected_genre+header.get_index()-3) % (genres.size()-1)].title.strip_edges()
+	header.get_child(2).text = title
+	match title:
+			"J-POP":
+				header.get_child(0).self_modulate = Color("42c0d3")	
+				header.get_child(1).self_modulate = Color("aae3ea")
+			"アニメ":
+				header.get_child(0).self_modulate = Color("ff90d2")
+				header.get_child(1).self_modulate = Color("ffcdeb")
+			"ボーカロイド", "VOCALOID":
+				header.get_child(0).self_modulate = Color("cccfde")
+				header.get_child(1).self_modulate = Color("e7e8f3")
+			"どうよう":
+				header.get_child(0).self_modulate = Color("fec000")
+				header.get_child(1).self_modulate = Color("ffe38d")
+			"バラエティ", "バラエティー":
+				header.get_child(0).self_modulate = Color("1ec83b")
+				header.get_child(1).self_modulate = Color("9ae6a7")
+			"クラシック":
+				header.get_child(0).self_modulate = Color("cac101")
+				header.get_child(1).self_modulate = Color("e6e38b")
+			"ゲームミュージック":
+				header.get_child(0).self_modulate = Color("cb89e8")
+				header.get_child(1).self_modulate = Color("e8cbf6")
+			"ナムコオリジナル":
+				header.get_child(0).self_modulate = Color("ff7028")
+				header.get_child(1).self_modulate = Color("ffc09e")
+			_:
+				header.get_child(0).self_modulate = Color("ffffff")
+				header.get_child(1).self_modulate = Color("ffffff")
 
 func get_songs(path: String) -> Array[Song]:
 	var rtn: Array[Song]

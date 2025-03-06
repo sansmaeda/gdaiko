@@ -1,96 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://l8ist8p1dved"]
+[gd_scene load_steps=38 format=3 uid="uid://l8ist8p1dved"]
 
 [ext_resource type="Script" path="res://Themes/Default Theme/Song Select/song_select.gd" id="1_8ihgu"]
 [ext_resource type="FontFile" uid="uid://c4ppcb7j6tido" path="res://Themes/Default Theme/大江戸勘亭流 Std E.otf" id="2_0i5eq"]
-
-[sub_resource type="Animation" id="Animation_teqnr"]
-resource_name = "move_forward"
-length = 2.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Headers/Header 0:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(109, 146), Vector2(99, 95)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Headers/Header -1:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(99, 95), Vector2(89, 44)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Headers/Header -2:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(89, 44), Vector2(81, 17)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Headers/Header -3:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(81, 17), Vector2(73, -10)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Headers/Header 1:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(117, 173), Vector2(109, 146)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Headers/Header 2:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(125, 200), Vector2(117, 173)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Headers/Header 3:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(133, 227), Vector2(125, 200)]
-}
+[ext_resource type="Texture2D" uid="uid://byuxfvo7iyca" path="res://Themes/Default Theme/Song Select/bg_none.png" id="3_lu3nw"]
+[ext_resource type="Texture2D" uid="uid://df5h7n53tvgxp" path="res://Themes/Default Theme/Song Select/fg_none.png" id="4_cmjj6"]
 
 [sub_resource type="Animation" id="Animation_8p2xe"]
 length = 0.001
@@ -181,7 +94,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Headers/Header 0/Panel:size")
+tracks/7/path = NodePath("Headers/Header 0/Background:size")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -189,6 +102,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(186, 26)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Headers/Header 0/Foreground:size")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(160, 18)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Headers/Header 0/Foreground:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, 4)]
 }
 
 [sub_resource type="Animation" id="Animation_dxa52"]
@@ -281,10 +218,158 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Headers/Header 0/Panel:size")
+tracks/7/path = NodePath("Headers/Header 0/Background:size")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(186, 26), Vector2(186, 26), Vector2(186, 64)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Headers/Header 0/Foreground:size")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(160, 18), Vector2(160, 18), Vector2(160, 36)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Headers/Header 0/Foreground:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(14, 4), Vector2(14, 4), Vector2(14, 23)]
+}
+
+[sub_resource type="Animation" id="Animation_teqnr"]
+resource_name = "move_forward"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Headers/Header 0:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(109, 146), Vector2(99, 95), Vector2(99, 95), Vector2(99, 76)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Headers/Header -1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(99, 95), Vector2(89, 44)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Headers/Header -2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(89, 44), Vector2(81, 17)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Headers/Header -3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(81, 17), Vector2(73, -10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Headers/Header 1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(117, 173), Vector2(109, 146)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Headers/Header 2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(125, 200), Vector2(117, 173)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Headers/Header 3:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(133, 227), Vector2(125, 200)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Headers/Header 0/Foreground:size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(160, 18), Vector2(160, 18), Vector2(160, 36)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Headers/Header 0/Foreground:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(14, 4), Vector2(14, 4), Vector2(14, 23)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Headers/Header 0/Background:size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(0, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -298,11 +383,151 @@ _data = {
 "move_forward": SubResource("Animation_teqnr")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0hd0"]
+texture = ExtResource("3_lu3nw")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_uello"]
+Panel/styles/panel = SubResource("StyleBoxTexture_f0hd0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ghxqo"]
+texture = ExtResource("4_cmjj6")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="Theme" id="Theme_mtbst"]
+Panel/styles/panel = SubResource("StyleBoxTexture_ghxqo")
+
 [sub_resource type="LabelSettings" id="LabelSettings_ymj8m"]
 font = ExtResource("2_0i5eq")
 font_size = 11
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_61ck0"]
+texture = ExtResource("3_lu3nw")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_3o7ao"]
+Panel/styles/panel = SubResource("StyleBoxTexture_61ck0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fr14v"]
+texture = ExtResource("4_cmjj6")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="Theme" id="Theme_xx5ee"]
+Panel/styles/panel = SubResource("StyleBoxTexture_fr14v")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ejodq"]
+texture = ExtResource("3_lu3nw")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_nopqj"]
+Panel/styles/panel = SubResource("StyleBoxTexture_ejodq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ovagi"]
+texture = ExtResource("4_cmjj6")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="Theme" id="Theme_u0k60"]
+Panel/styles/panel = SubResource("StyleBoxTexture_ovagi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sluj"]
+texture = ExtResource("3_lu3nw")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_p1p6x"]
+Panel/styles/panel = SubResource("StyleBoxTexture_1sluj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bly48"]
+texture = ExtResource("4_cmjj6")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="Theme" id="Theme_2cfjb"]
+Panel/styles/panel = SubResource("StyleBoxTexture_bly48")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mqkb3"]
+texture = ExtResource("3_lu3nw")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_37w1l"]
+Panel/styles/panel = SubResource("StyleBoxTexture_mqkb3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_osk8o"]
+texture = ExtResource("4_cmjj6")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="Theme" id="Theme_3v3ba"]
+Panel/styles/panel = SubResource("StyleBoxTexture_osk8o")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_035lc"]
+texture = ExtResource("3_lu3nw")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_jss2x"]
+Panel/styles/panel = SubResource("StyleBoxTexture_035lc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fhlan"]
+texture = ExtResource("4_cmjj6")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="Theme" id="Theme_fu3fp"]
+Panel/styles/panel = SubResource("StyleBoxTexture_fhlan")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kyxmo"]
+texture = ExtResource("3_lu3nw")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_pdbaq"]
+Panel/styles/panel = SubResource("StyleBoxTexture_kyxmo")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k1uwx"]
+texture = ExtResource("4_cmjj6")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="Theme" id="Theme_hkorb"]
+Panel/styles/panel = SubResource("StyleBoxTexture_k1uwx")
 
 [node name="SongSelect" type="Node2D"]
 script = ExtResource("1_8ihgu")
@@ -317,12 +542,17 @@ libraries = {
 [node name="Header -3" type="Node2D" parent="Headers"]
 position = Vector2(73, -10)
 
-[node name="Sprite2D" type="Sprite2D" parent="Headers/Header -3"]
-position = Vector2(186, 26)
-
-[node name="Panel" type="Panel" parent="Headers/Header -3"]
+[node name="Background" type="Panel" parent="Headers/Header -3"]
 offset_right = 186.0
 offset_bottom = 26.0
+theme = SubResource("Theme_uello")
+
+[node name="Foreground" type="Panel" parent="Headers/Header -3"]
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 174.0
+offset_bottom = 22.0
+theme = SubResource("Theme_mtbst")
 
 [node name="Label" type="Label" parent="Headers/Header -3"]
 offset_top = 6.0
@@ -336,12 +566,17 @@ vertical_alignment = 1
 [node name="Header -2" type="Node2D" parent="Headers"]
 position = Vector2(81, 17)
 
-[node name="Sprite2D" type="Sprite2D" parent="Headers/Header -2"]
-position = Vector2(186, 26)
-
-[node name="Panel" type="Panel" parent="Headers/Header -2"]
+[node name="Background" type="Panel" parent="Headers/Header -2"]
 offset_right = 186.0
 offset_bottom = 26.0
+theme = SubResource("Theme_3o7ao")
+
+[node name="Foreground" type="Panel" parent="Headers/Header -2"]
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 174.0
+offset_bottom = 22.0
+theme = SubResource("Theme_xx5ee")
 
 [node name="Label" type="Label" parent="Headers/Header -2"]
 offset_top = 6.0
@@ -355,12 +590,17 @@ vertical_alignment = 1
 [node name="Header -1" type="Node2D" parent="Headers"]
 position = Vector2(89, 44)
 
-[node name="Sprite2D" type="Sprite2D" parent="Headers/Header -1"]
-position = Vector2(186, 26)
-
-[node name="Panel" type="Panel" parent="Headers/Header -1"]
+[node name="Background" type="Panel" parent="Headers/Header -1"]
 offset_right = 186.0
 offset_bottom = 26.0
+theme = SubResource("Theme_nopqj")
+
+[node name="Foreground" type="Panel" parent="Headers/Header -1"]
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 174.0
+offset_bottom = 22.0
+theme = SubResource("Theme_u0k60")
 
 [node name="Label" type="Label" parent="Headers/Header -1"]
 offset_top = 6.0
@@ -374,12 +614,17 @@ vertical_alignment = 1
 [node name="Header 0" type="Node2D" parent="Headers"]
 position = Vector2(99, 95)
 
-[node name="Sprite2D" type="Sprite2D" parent="Headers/Header 0"]
-position = Vector2(186, 26)
-
-[node name="Panel" type="Panel" parent="Headers/Header 0"]
+[node name="Background" type="Panel" parent="Headers/Header 0"]
 offset_right = 186.0
 offset_bottom = 26.0
+theme = SubResource("Theme_p1p6x")
+
+[node name="Foreground" type="Panel" parent="Headers/Header 0"]
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 174.0
+offset_bottom = 22.0
+theme = SubResource("Theme_2cfjb")
 
 [node name="Label" type="Label" parent="Headers/Header 0"]
 offset_top = 6.0
@@ -393,12 +638,17 @@ vertical_alignment = 1
 [node name="Header 1" type="Node2D" parent="Headers"]
 position = Vector2(109, 146)
 
-[node name="Sprite2D" type="Sprite2D" parent="Headers/Header 1"]
-position = Vector2(186, 26)
-
-[node name="Panel" type="Panel" parent="Headers/Header 1"]
+[node name="Background" type="Panel" parent="Headers/Header 1"]
 offset_right = 186.0
 offset_bottom = 26.0
+theme = SubResource("Theme_37w1l")
+
+[node name="Foreground" type="Panel" parent="Headers/Header 1"]
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 174.0
+offset_bottom = 22.0
+theme = SubResource("Theme_3v3ba")
 
 [node name="Label" type="Label" parent="Headers/Header 1"]
 offset_top = 6.0
@@ -412,12 +662,17 @@ vertical_alignment = 1
 [node name="Header 2" type="Node2D" parent="Headers"]
 position = Vector2(117, 173)
 
-[node name="Sprite2D" type="Sprite2D" parent="Headers/Header 2"]
-position = Vector2(186, 26)
-
-[node name="Panel" type="Panel" parent="Headers/Header 2"]
+[node name="Background" type="Panel" parent="Headers/Header 2"]
 offset_right = 186.0
 offset_bottom = 26.0
+theme = SubResource("Theme_jss2x")
+
+[node name="Foreground" type="Panel" parent="Headers/Header 2"]
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 174.0
+offset_bottom = 22.0
+theme = SubResource("Theme_fu3fp")
 
 [node name="Label" type="Label" parent="Headers/Header 2"]
 offset_top = 6.0
@@ -431,12 +686,17 @@ vertical_alignment = 1
 [node name="Header 3" type="Node2D" parent="Headers"]
 position = Vector2(125, 200)
 
-[node name="Sprite2D" type="Sprite2D" parent="Headers/Header 3"]
-position = Vector2(186, 26)
-
-[node name="Panel" type="Panel" parent="Headers/Header 3"]
+[node name="Background" type="Panel" parent="Headers/Header 3"]
 offset_right = 186.0
 offset_bottom = 26.0
+theme = SubResource("Theme_pdbaq")
+
+[node name="Foreground" type="Panel" parent="Headers/Header 3"]
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 174.0
+offset_bottom = 22.0
+theme = SubResource("Theme_hkorb")
 
 [node name="Label" type="Label" parent="Headers/Header 3"]
 offset_top = 6.0

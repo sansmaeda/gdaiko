@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c557sxr4oqv21"]
+
+[ext_resource type="Texture2D" uid="uid://hpplhvalstee" path="res://Themes/Default Theme/Song Select/bg_pop.png" id="1_c4awn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_geeq8"]
+texture = ExtResource("1_c4awn")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_geeq8")
