@@ -13,6 +13,7 @@ var _scroll: float = 1
 var _measure: float = 1
 var _balloon_active: bool = false
 var _roll_active: bool = false
+var _total_notes: int = 0
 
 var _score_p1: Score
 var _score_p2: Score
@@ -142,6 +143,7 @@ func _ready():
 						new_note.score = _score_p1
 						$Notes.add_child(new_note)
 						$Notes.move_child(new_note, 0)
+						_total_notes += 1
 					elif(line[n] == "8"):
 						_balloon_active = false
 						_roll_active = false
@@ -153,19 +155,19 @@ func _ready():
 		"ボーカロイド", "VOCALOID":
 			var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
 			$Background.add_child(bg.instantiate())
-	_score_p1 = Score.new($Notes.get_child_count())
+	_score_p1 = Score.new(_total_notes)
 
 func _input(event: InputEvent) -> void:
-	if(Input.is_action_pressed("p1_don_left")):
+	if(event.is_action_pressed("p1_don_left")):
 		$"Taiko/Don Left".stop()
 		$"Taiko/Don Left".play("play")
-	if(Input.is_action_pressed("p1_don_right")):
+	if(event.is_action_pressed("p1_don_right")):
 		$"Taiko/Don Right".stop()
 		$"Taiko/Don Right".play("play")
-	if(Input.is_action_pressed("p1_ka_left")):
+	if(event.is_action_pressed("p1_ka_left")):
 		$"Taiko/Ka Left".stop()
 		$"Taiko/Ka Left".play("play")
-	if(Input.is_action_pressed("p1_ka_right")):
+	if(event.is_action_pressed("p1_ka_right")):
 		$"Taiko/Ka Right".stop()
 		$"Taiko/Ka Right".play("play")
 
