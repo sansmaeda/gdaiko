@@ -59,7 +59,6 @@ func _ready():
 	for i: RegExMatch in regex.search_all(_chart.data):
 		var blob: String = i.get_string(1).strip_edges()
 		var note_count: int = 0
-		var measure_total = 60 * _measure * 4 / _bpm
 		
 		#Get note count in measure
 		#Ignore lines starting with #
@@ -129,9 +128,9 @@ func _ready():
 					pass
 				elif(line.begins_with("#NEXTSONG")):
 					pass
-				measure_total = 60 * _measure * 4 / _bpm
-			elif line == ",":
-				prev_time += measure_total
+			elif line == "":
+				print("FLAG")
+				prev_time += 60 * _measure * 4 / _bpm
 			else:
 				for n in range(0, line.length()):
 					if(line[n] != "0" && line[n] != "8"):
@@ -149,7 +148,7 @@ func _ready():
 						_roll_active = false
 					if(_balloon_active):
 						pass
-					prev_time += measure_total / note_count
+					prev_time += (60 * _measure * 4 / _bpm) / note_count
 	print(BackgroundData.genre)
 	match BackgroundData.genre.strip_edges():
 		"ボーカロイド", "VOCALOID":
