@@ -8,7 +8,7 @@ var selected_genre: int = 0:
 var selected_song: int = 0:
 	get:
 		if focused:
-			return selected_song % (song_list.size()+1+ceil(selected_song/_close_freq))
+			return selected_song % (song_list.size()+1+ceil((selected_song)/_close_freq))
 		else:
 			return selected_song
 #Represents whether the menu is in genre or song selector
@@ -64,7 +64,7 @@ func _input(event):
 				focused = false
 			else:
 				BackgroundData.genre = genres[selected_genre%genres.size()].title
-				load_game(song_list[selected_song-ceil(selected_song/_close_freq)-1].path)
+				load_game(song_list[selected_song-ceil(float(selected_song)/_close_freq)-1].path)
 
 func _process(_delta):
 	pass
@@ -99,8 +99,8 @@ func set_genre_data(header: Node2D) -> void:
 func set_song_data(header: Node2D) -> void:
 	var type: String
 	var offset = header.get_index()-3
-	var cancel_count: int = ceil(selected_song/_close_freq)
-	if selected_song+offset < 0 || selected_song+offset-ceil((selected_song+offset)/_close_freq) > song_list.size():
+	var cancel_count: int = ceil(float(selected_song)/_close_freq)
+	if selected_song+offset < 0 || selected_song+offset-ceil(float(selected_song+offset)/_close_freq) > song_list.size():
 		set_genre_data(header)
 	elif (selected_song+offset) % _close_freq == 0:
 		header.get_child(2).text = "とじる"
@@ -108,7 +108,7 @@ func set_song_data(header: Node2D) -> void:
 		header.get_child(1).self_modulate = Color("aa7327")
 	else:
 		var parser = TJAParser.new()
-		parser.parse(song_list[selected_song+offset-ceil((selected_song+offset)/_close_freq)-1].path)
+		parser.parse(song_list[selected_song+offset-ceil(float(selected_song+offset)/_close_freq)-1].path)
 		header.get_child(2).text = parser.title_ja
 		header.get_child(0).self_modulate = get_color_data(genres[selected_genre].title.strip_edges())[0]
 		header.get_child(1).self_modulate = get_color_data(genres[selected_genre].title.strip_edges())[1]

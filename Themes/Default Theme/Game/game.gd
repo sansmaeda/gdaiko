@@ -46,6 +46,7 @@ func _ready():
 	elif(game.wave.ends_with(".mp3")):
 		pass
 	$Wave.play()
+	$Wave.connect("finished", on_song_finished)
 	match course:
 		"Edit":
 			_chart = game.chart_oni
@@ -169,6 +170,7 @@ func _input(event: InputEvent) -> void:
 		$"Taiko/Ka Right".play("play")
 
 var ended: bool = false
+var song_ended: bool = false
 func _process(_delta):
 	if(_score_p1.combo >= 5):
 		$Combo.visible = true
@@ -176,9 +178,12 @@ func _process(_delta):
 	else:
 		$Combo.visible = false
 	$Score.text = str(_score_p1.score)
-	if(!ended && $Wave.finished && $Notes.get_children().size() == 0):
+	if(!ended && song_ended && $Notes.get_children().size() == 0):
 		ended = true
 		await get_tree().create_timer(1.0).timeout
-		var main: Node2D = load("res://Themes/Default Theme/main.tscn").instantiate()
+		var main: Node2D = load("res://Themes/Default Theme/Song Select/song_select.tscn").instantiate()
 		get_parent().add_child(main)
 		self.queue_free()
+
+func on_song_finished() -> void:
+	song_ended = true
