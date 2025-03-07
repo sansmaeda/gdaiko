@@ -8,4 +8,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if(Input.is_action_just_pressed("p1_don_right")):
-		get_tree().change_scene_to_file("res://Themes/Default Theme/Song Select/song_select.tscn")
+		var game: Node2D = load("res://Themes/Default Theme/Song Select/song_select.tscn").instantiate()
+		get_parent().add_child(game)
+		self.queue_free()

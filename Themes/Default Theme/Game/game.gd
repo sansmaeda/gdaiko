@@ -48,7 +48,7 @@ func _ready():
 	$Wave.play()
 	match course:
 		"Edit":
-			_chart = game.chart_edit
+			_chart = game.chart_oni
 	#endregion
 	
 	#Get measure (can contaim multiple lines)
@@ -101,14 +101,14 @@ func _ready():
 				
 				elif(line.begins_with("#GOGOSTART")):
 					var ggs: Node2D = gg_res.instantiate()
-					ggs.speed = game.head_scroll * _scroll * 130
+					ggs.speed = game.head_scroll * _scroll * 260 * 1.5
 					ggs.position.x = 260 * (prev_time + -_offset) * (ggs.speed / 260)
 					ggs.value = true
 					add_child(ggs)
 				
 				elif(line.begins_with("#GOGOEND")):
 					var gge: Node2D = gg_res.instantiate()
-					gge.speed = game.head_scroll * _scroll * 130
+					gge.speed = game.head_scroll * _scroll * 260 * 1.5
 					gge.position.x = 260 * (prev_time + -_offset) * (gge.speed / 260)
 					gge.value = false
 					add_child(gge)
@@ -128,14 +128,14 @@ func _ready():
 				elif(line.begins_with("#NEXTSONG")):
 					pass
 				measure_total = 60 * _measure * 4 / _bpm
-			elif line.length()==0:
+			elif line == ",":
 				prev_time += measure_total
 			else:
 				for n in range(0, line.length()):
 					if(line[n] != "0" && line[n] != "8"):
 						var new_note: Note = note.instantiate()
 						new_note.type = line[n]
-						new_note.speed = game.head_scroll * _scroll * 130
+						new_note.speed = game.head_scroll * _scroll * 260 / 1.5
 						new_note.position.x = 260 * (prev_time + -_offset) * (new_note.speed / 260)
 						new_note.time = new_note.position.x / new_note.speed / 260
 						new_note.score = _score_p1
@@ -147,14 +147,28 @@ func _ready():
 					if(_balloon_active):
 						pass
 					prev_time += measure_total / note_count
-	var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
-	$Background.add_child(bg.instantiate())
-	#match game.genre:
-		#"Vocaloid":
-			#var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
-			#$Background.add_child(bg)
-			#$"Background/Vocaloid/Animation Player".play("play")
+	print(BackgroundData.genre)
+	match BackgroundData.genre.strip_edges():
+		"ボーカロイド", "VOCALOID":
+			var bg = load("res://Themes/Default Theme/Backgrounds/Vocaloid/vocaloid.tscn")
+			$Background.add_child(bg.instantiate())
 	_score_p1 = Score.new($Notes.get_child_count())
+
+func _input(event: InputEvent) -> void:
+	if(Input.is_action_pressed("p1_don_left")):
+		$"Taiko/Don Left".stop()
+		$"Taiko/Don Left".play("play")
+	if(Input.is_action_pressed("p1_don_right")):
+		$"Taiko/Don Right".stop()
+		$"Taiko/Don Right".play("play")
+	if(Input.is_action_pressed("p1_ka_left")):
+		$"Taiko/Ka Left".stop()
+		$"Taiko/Ka Left".play("play")
+	if(Input.is_action_pressed("p1_ka_right")):
+		$"Taiko/Ka Right".stop()
+		$"Taiko/Ka Right".play("play")
+
+var ended: bool = false
 func _process(_delta):
 	if(_score_p1.combo >= 5):
 		$Combo.visible = true
@@ -162,18 +176,9 @@ func _process(_delta):
 	else:
 		$Combo.visible = false
 	$Score.text = str(_score_p1.score)
-	if(Input.is_action_just_pressed("don_left")):
-		$"Taiko/Don Left".stop()
-		$"Taiko/Don Left".play("play")
-	if(Input.is_action_just_pressed("don_right")):
-		$"Taiko/Don Right".stop()
-		$"Taiko/Don Right".play("play")
-	if(Input.is_action_just_pressed("ka_left")):
-		$"Taiko/Ka Left".stop()
-		$"Taiko/Ka Left".play("play")
-	if(Input.is_action_just_pressed("ka_right")):
-		$"Taiko/Ka Right".stop()
-		$"Taiko/Ka Right".play("play")
-	#if($Wave.finished && $Notes.get_children().size() == 0):
-		#await get_tree().create_timer(1.0).timeout
-		#get_tree().change_scene_to_file("res://Themes/Default Theme/main.tscn")
+	if(!ended && $Wave.finished && $Notes.get_children().size() == 0):
+		ended = true
+		await get_tree().create_timer(1.0).timeout
+		var main: Node2D = load("res://Themes/Default Theme/main.tscn").instantiate()
+		get_parent().add_child(main)
+		self.queue_free()

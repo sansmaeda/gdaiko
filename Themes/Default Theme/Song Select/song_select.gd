@@ -39,9 +39,10 @@ func _input(event):
 				$AnimationPlayer.play("move_forward")
 		for h in $Headers.get_children():
 			set_genre_data(h)
-		if event.is_action_pressed("p1_don_right"): focused = true
+		if event.is_action_pressed("p1_don_right"): 
+			focused = true
+			song_list = get_songs(genres[selected_genre%genres.size()].path)
 	else: #focused
-		song_list = get_songs(genres[selected_genre%genres.size()].path)
 		if(event.is_action_pressed("p1_ka_left")):
 			selected_song -= 1
 			$AnimationPlayer.stop()
@@ -57,10 +58,12 @@ func _input(event):
 				selected_genre += selected_song
 				selected_genre = selected_genre % genres.size()
 				selected_song = 0
+				song_list = get_songs(genres[selected_genre%genres.size()].path)
 			elif(selected_song % _close_freq == 0):
 				selected_song = 0
 				focused = false
 			else:
+				BackgroundData.genre = genres[selected_genre%genres.size()].title
 				load_game(song_list[selected_song-ceil(selected_song/_close_freq)-1].path)
 
 func _process(_delta):
@@ -97,16 +100,16 @@ func set_song_data(header: Node2D) -> void:
 	var type: String
 	var offset = header.get_index()-3
 	var cancel_count: int = ceil(selected_song/_close_freq)
-	if selected_song+offset < 0 || selected_song+offset-ceil(selected_song/_close_freq) > song_list.size():
+	if selected_song+offset < 0 || selected_song+offset-ceil((selected_song+offset)/_close_freq) > song_list.size():
 		set_genre_data(header)
 	elif (selected_song+offset) % _close_freq == 0:
-		header.get_child(2).text = "Close"
-		header.get_child(0).self_modulate = Color("000000")
+		header.get_child(2).text = "とじる"
+		header.get_child(0).self_modulate = Color("aa7327")
+		header.get_child(1).self_modulate = Color("aa7327")
 	else:
 		var parser = TJAParser.new()
-		print(selected_song+offset-ceil(selected_song/_close_freq))
-		parser.parse(song_list[selected_song+offset-ceil(selected_song/_close_freq)-1].path)
-		header.get_child(2).text = parser.title
+		parser.parse(song_list[selected_song+offset-ceil((selected_song+offset)/_close_freq)-1].path)
+		header.get_child(2).text = parser.title_ja
 		header.get_child(0).self_modulate = get_color_data(genres[selected_genre].title.strip_edges())[0]
 		header.get_child(1).self_modulate = get_color_data(genres[selected_genre].title.strip_edges())[1]
 

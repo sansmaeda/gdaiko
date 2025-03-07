@@ -392,7 +392,10 @@ func parse(path: String):
 		#Chart
 		regex.compile(r'(?m)^COURSE:(.*)$')
 		buffer = regex.search(staging)
-		chart.course = buffer.get_string(1).strip_escapes()
+		if(buffer):
+			chart.course = buffer.get_string(1).strip_escapes()
+		else:
+			chart.course = "Oni"
 		match chart.course:
 			"Easy", "0":
 				chart_easy = chart

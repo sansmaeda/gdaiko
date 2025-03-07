@@ -21,6 +21,10 @@ config/icon="res://Themes/Default Theme/Sprites/Notes/don2.png"
 
 BackgroundData="*res://src/background_data.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/viewport_width=1920
