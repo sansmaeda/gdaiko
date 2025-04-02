@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://l8ist8p1dved"]
 
-[ext_resource type="Script" path="res://Themes/Default Theme/Song Select/song_select.gd" id="1_8ihgu"]
+[ext_resource type="Script" uid="uid://gkdt0huvuq5d" path="res://Themes/Default Theme/Song Select/song_select.gd" id="1_8ihgu"]
 [ext_resource type="FontFile" uid="uid://c4ppcb7j6tido" path="res://Themes/Default Theme/大江戸勘亭流 Std E.otf" id="2_0i5eq"]
 [ext_resource type="Texture2D" uid="uid://byuxfvo7iyca" path="res://Themes/Default Theme/Song Select/bg_none.png" id="3_lu3nw"]
 [ext_resource type="Texture2D" uid="uid://df5h7n53tvgxp" path="res://Themes/Default Theme/Song Select/fg_none.png" id="4_cmjj6"]
@@ -378,9 +378,9 @@ tracks/9/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_241ct"]
 _data = {
-"RESET": SubResource("Animation_8p2xe"),
-"move_backward": SubResource("Animation_dxa52"),
-"move_forward": SubResource("Animation_teqnr")
+&"RESET": SubResource("Animation_8p2xe"),
+&"move_backward": SubResource("Animation_dxa52"),
+&"move_forward": SubResource("Animation_teqnr")
 }
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0hd0"]
@@ -534,7 +534,7 @@ script = ExtResource("1_8ihgu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_241ct")
+&"": SubResource("AnimationLibrary_241ct")
 }
 
 [node name="Headers" type="Node2D" parent="."]

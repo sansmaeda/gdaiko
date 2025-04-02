@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://kiinikos2hsu"]
 
-[ext_resource type="Script" path="res://Themes/Default Theme/main.gd" id="1_olxac"]
+[ext_resource type="Script" uid="uid://v6puwk2lp5dp" path="res://Themes/Default Theme/main.gd" id="1_olxac"]
 [ext_resource type="Texture2D" uid="uid://cbbrgy2kuj4e4" path="res://Themes/Default Theme/Sprites/Notes/don.png" id="2_d65u4"]
 
 [node name="Main" type="Node2D"]

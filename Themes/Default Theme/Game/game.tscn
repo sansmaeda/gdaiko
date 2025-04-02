@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://nepmo5wepcke"]
 
-[ext_resource type="Script" path="res://Themes/Default Theme/Game/game.gd" id="1_7j4fm"]
+[ext_resource type="Script" uid="uid://pg88kicrnf1e" path="res://Themes/Default Theme/Game/game.gd" id="1_7j4fm"]
 [ext_resource type="Texture2D" uid="uid://byxfk61734fw4" path="res://Themes/Default Theme/Sprites/card.png" id="3_ppam1"]
 [ext_resource type="Texture2D" uid="uid://beghdesp6mcql" path="res://Themes/Default Theme/Sprites/taiko.png" id="4_ujq87"]
 [ext_resource type="Texture2D" uid="uid://djgg5th4dsu4e" path="res://Themes/Default Theme/Sprites/track.png" id="5_0c4ag"]
@@ -76,8 +76,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_80lmv"]
 _data = {
-"RESET": SubResource("Animation_wf8si"),
-"play": SubResource("Animation_ekprw")
+&"RESET": SubResource("Animation_wf8si"),
+&"play": SubResource("Animation_ekprw")
 }
 
 [sub_resource type="Animation" id="Animation_23enb"]
@@ -138,8 +138,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h5mns"]
 _data = {
-"RESET": SubResource("Animation_23enb"),
-"play": SubResource("Animation_p5moj")
+&"RESET": SubResource("Animation_23enb"),
+&"play": SubResource("Animation_p5moj")
 }
 
 [sub_resource type="Animation" id="Animation_qvv5q"]
@@ -201,8 +201,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_en6kh"]
 _data = {
-"RESET": SubResource("Animation_qvv5q"),
-"play": SubResource("Animation_3i5p5")
+&"RESET": SubResource("Animation_qvv5q"),
+&"play": SubResource("Animation_3i5p5")
 }
 
 [sub_resource type="Animation" id="Animation_5ywas"]
@@ -239,8 +239,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ldg8i"]
 _data = {
-"RESET": SubResource("Animation_5ywas"),
-"play": SubResource("Animation_a8e2r")
+&"RESET": SubResource("Animation_5ywas"),
+&"play": SubResource("Animation_a8e2r")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_p21in"]
@@ -285,7 +285,7 @@ centered = false
 
 [node name="Don Left" type="AnimationPlayer" parent="Taiko"]
 libraries = {
-"": SubResource("AnimationLibrary_80lmv")
+&"": SubResource("AnimationLibrary_80lmv")
 }
 
 [node name="Don Left Image" type="Sprite2D" parent="Taiko"]
@@ -296,7 +296,7 @@ centered = false
 
 [node name="Don Right" type="AnimationPlayer" parent="Taiko"]
 libraries = {
-"": SubResource("AnimationLibrary_h5mns")
+&"": SubResource("AnimationLibrary_h5mns")
 }
 
 [node name="Don Right Image" type="Sprite2D" parent="Taiko"]
@@ -308,7 +308,7 @@ centered = false
 [node name="Ka Left" type="AnimationPlayer" parent="Taiko"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_en6kh")
+&"": SubResource("AnimationLibrary_en6kh")
 }
 
 [node name="Ka Left Image" type="Sprite2D" parent="Taiko"]
@@ -319,7 +319,7 @@ centered = false
 
 [node name="Ka Right" type="AnimationPlayer" parent="Taiko"]
 libraries = {
-"": SubResource("AnimationLibrary_ldg8i")
+&"": SubResource("AnimationLibrary_ldg8i")
 }
 
 [node name="Ka Right Image" type="Sprite2D" parent="Taiko"]

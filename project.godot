@@ -12,7 +12,7 @@ config_version=5
 
 config/name="gdaiko"
 run/main_scene="res://src/Intro/intro.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=120
 boot_splash/show_image=false
 config/icon="res://Themes/Default Theme/Sprites/Notes/don2.png"

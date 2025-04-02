@@ -136,15 +136,15 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_itdjh"]
 _data = {
-"RESET": SubResource("Animation_jc4du"),
-"play": SubResource("Animation_2asi8")
+&"RESET": SubResource("Animation_jc4du"),
+&"play": SubResource("Animation_2asi8")
 }
 
 [node name="Vocaloid" type="Node2D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_itdjh")
+&"": SubResource("AnimationLibrary_itdjh")
 }
 autoplay = "play"
 
